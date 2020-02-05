@@ -1,0 +1,16 @@
+.footer {
+  position: fixed;
+  bottom: 0;
+  height:10vh;
+  width: 100vw;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  background-color: #eeee;
+}
+.noActive {
+  color: #555;
+}
+.active {
+  color: red;
+}

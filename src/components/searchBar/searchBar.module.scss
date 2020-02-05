@@ -1,0 +1,28 @@
+$h : 5vh;
+.bar {
+  height : $h;
+  align-self: center;
+  width: 60vw;
+  .input {
+    height : $h;
+    background-color: #ddd;
+    border-radius: 100px;
+    width: 60vw;
+    padding: 0px 0px;
+    padding-left: 28px;
+    font-size: 18px;
+    line-height: $h;
+  }
+  .inner {
+    position: relative;
+    display: inline-block;
+    height : $h;
+    top: -$h;
+    left : 5px;
+    vertical-align: middle;
+    i {
+      line-height: $h
+    }
+  }
+}
+

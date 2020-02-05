@@ -1,0 +1,27 @@
+.carouselBody {
+  border: #594 1px dashed;
+  overflow: hidden;
+}
+.imgBody {
+  display: flex;
+  position: relative;
+}
+.btnBody {
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+  top: -100%;
+}
+.leftBtn {
+  width: 40px;
+  height: 30px;
+  align-self: center;
+}
+.rightBtn {
+  width: 40px;
+  height: 30px;
+  align-self: center;
+}
+.bottomBtns {
+  align-self: flex-end;
+}
