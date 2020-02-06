@@ -1,6 +1,7 @@
 .carouselBody {
-  border: #594 1px dashed;
   overflow: hidden;
+  margin: 0 auto;
+  border-radius: 12px;
 }
 .imgBody {
   display: flex;
@@ -12,16 +13,27 @@
   justify-content: space-between;
   top: -100%;
 }
-.leftBtn {
-  width: 40px;
-  height: 30px;
+.btn {
+  width: 60px;
+  height: 60px;
   align-self: center;
+  background-color: #0000;
+  font-size: 30px;
+  font-weight : 900;
+  color: #fff;
+}
+.leftBtn {
+  @extend .btn
 }
 .rightBtn {
-  width: 40px;
-  height: 30px;
-  align-self: center;
+  @extend .btn
 }
 .bottomBtns {
   align-self: flex-end;
+  margin-bottom: 5px;
+  input[type="radio"]{
+    width: 17px;
+    height: 17px;
+    background-color: #fff;
+  }
 }

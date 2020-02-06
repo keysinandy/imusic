@@ -1,29 +1,20 @@
 import React, { useEffect } from 'react';
 import Carousel from '../../components/carousel/Carousel';
 import * as actionTypes from './store/actionCreator';
-import { connect } from 'react-redux'
-const Recommend = (props) => {
-  const { bannerImgList } = props;
-  const { getBannerDataDispatch } = props;
-  useEffect (() => {
-    getBannerDataDispatch ();
-  }, []);
+import { useSelector, useDispatch } from 'react-redux'
 
-  const imgList = bannerImgList ? bannerImgList : [];
-  console.log(imgList,bannerImgList)
+const Recommend = (props) => {
+  const bannerList = useSelector(state => state.recommend.bannerList);
+  const dispatch = useDispatch(); 
+  useEffect (() => {
+    dispatch(actionTypes.getBannerList())
+    // eslint-disable-next-line 
+  }, []);
+  const imgList = bannerList ? bannerList : [];
+  const width = window.innerWidth - 10;
   return <div>
-    <Carousel bgW = {300} bgH = {200} intervalTime={3000} imgList={imgList}/>
+    <Carousel bgW = {width} bgH = {200} intervalTime={3000} imgList={imgList}/>
     Recommend
   </div>
-} 
-const mapStateToProps = (state) => ({
-  bannerList: state.bannerList,
-});
-const mapDispatchToProps = (dispatch) => {
-  return {
-    getBannerDataDispatch () {
-      dispatch (actionTypes.getBannerList());
-    }
-  }
-};
-export default connect (mapStateToProps, mapDispatchToProps)(React.memo(Recommend));;
+}
+export default React.memo(Recommend);

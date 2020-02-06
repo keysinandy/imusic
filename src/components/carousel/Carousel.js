@@ -1,5 +1,6 @@
 import React, {useState, useEffect, useRef, useCallback} from 'react';
 import style from './carousel.module.scss';
+import icon from '../../icon';
 const Carousel = (props) => {
     // 图片数组，宽度、高度、自动切换图片的事件
     const {imgList,bgW,bgH,intervalTime} = props;
@@ -23,7 +24,8 @@ const Carousel = (props) => {
         imgBodyRef.current.style.left = '0px';
         btnBodyRef.current.style.width = bgW + 'px';
         btnBodyRef.current.style.height = bgH + 'px';
-    },[bgW, bgH, imgLength])
+        setList(imgList);
+    },[bgW, bgH, imgLength, imgList])
 
     //定时器轮播
     /**
@@ -128,18 +130,22 @@ const Carousel = (props) => {
                 return <div id={`img-${i}`} key={`${i}`} style={{
                     width:bgW,
                     height:bgH,
-                    backgroundImage:`url(${v})`,
+                    backgroundImage:`url(${v}?param=${bgW}y${bgH})`,
                 }}></div>
             })}
         </div>
         <div className={style.btnBody} ref={btnBodyRef}>
-            <button className={style.leftBtn} onClick = {handleToPrevPic}>left</button>
+            <button className={style.leftBtn} onClick = {handleToPrevPic}>
+                <i className="iconfont">{icon.left}</i>
+            </button>
             <ul className={style.bottomBtns}>
                 {imgList.map((v,i)=>{
                     return <input type="radio" name="selectPic" id={`radio-${i}`} key={`radio-${i}`} checked={i === picViewIndex} onChange={handleRadioChange}/>
                 })}
             </ul>
-            <button className={style.rightBtn} onClick = {handleToNextPic}>right</button>
+            <button className={style.rightBtn} onClick = {handleToNextPic}>
+                <i className="iconfont">{icon.right}</i>
+            </button>
         </div>
     </div>
 }
