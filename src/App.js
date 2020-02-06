@@ -4,20 +4,23 @@ import route from './routes/index.js';
 import { HashRouter } from 'react-router-dom';
 import Header from './page/header/Header';
 import Footer from './page/footer/Footer';
+import {Provider} from 'react-redux';
+import store from './store/store';
 import './App.css'
 
 function App() {
   return (
-    // Provider
-    <div className="App">
-      <HashRouter>
-        <Header />
-        <div>
-          {renderRoutes(route)}
-        </div>
-        <Footer />
-      </HashRouter>
-    </div>
+    <Provider store={store}>
+      <div className="App">
+        <HashRouter>
+          <Header />
+          <div>
+            {renderRoutes(route)}
+          </div>
+          <Footer />
+        </HashRouter>
+      </div>
+    </Provider>
   );
 }
 
