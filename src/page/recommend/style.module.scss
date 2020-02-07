@@ -1,3 +1,7 @@
+.recommend {
+  margin-top: 8vh;
+  overflow: scroll;
+}
 .bannerIcon {
  display: flex;
  justify-content: space-around;
@@ -19,4 +23,45 @@
     margin-top: 10px;
    }
  }
+}
+
+.songList {
+  margin-top: 20px;
+  border-top: 1px #333 solid;
+  padding: 0 2vw;
+  .songListTitle {
+    margin-top: 20px;
+    font-size: 20px;
+    font-weight: bolder;
+  }
+  .songListBody {
+    margin-top: 10px;
+    display: grid;
+    grid-template-columns: repeat(3,30vw);
+    grid-template-rows: repeat(3,35vw);
+    grid-column-gap: 3vw;
+    grid-row-gap: 40px;
+    .songListItem {
+      width: 30vw;
+      height: 30vw;
+      position: relative;
+      .songListItemCover {
+        width: 30vw;
+        height: 30vw;
+      }
+      .songListPlayCount {
+        position: absolute;
+        top: 5px;
+        right: 5px;
+        color: #fff;
+      }
+      .songListName {
+        margin-top: 5px;
+        display: -webkit-box;
+        -webkit-box-orient: vertical;
+        -webkit-line-clamp: 2;
+        overflow: hidden;
+      }
+    }
+  }
 }

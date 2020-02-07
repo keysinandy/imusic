@@ -78,3 +78,7 @@ input {
 input:focus {
   outline: none;
 }
+body {
+  overflow: hidden;
+  background: #fff;;
+}

@@ -1,7 +1,8 @@
 import { actionType } from './actionType';
 import { produce } from 'immer'
 const defaultState = {
-  bannerList: [],
+  bannerList : [],
+  songList : [],
 };
 
 const reducer = (state = defaultState,action) => {
@@ -10,6 +11,10 @@ const reducer = (state = defaultState,action) => {
       return produce(state,draft=>{
         draft.bannerList = action.data;
       });
+      case actionType.CHANGE_SONG_LIST:
+        return produce(state,draft=>{
+          draft.songList = action.data;
+        });
     default:
       return state;
   }

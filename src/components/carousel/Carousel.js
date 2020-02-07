@@ -3,7 +3,8 @@ import style from './carousel.module.scss';
 import icon from '../../icon';
 const Carousel = (props) => {
     // 图片数组，宽度、高度、自动切换图片的事件
-    const {imgList,bgW,bgH,intervalTime} = props;
+    const {dataList,bgW,bgH,intervalTime} = props;
+    const imgList = dataList.map(v=>v.imageUrl)
     const imgLength = imgList.length;
     //视窗图片索引
     const [picViewIndex, setPicViewIndex] = useState(0);
@@ -14,7 +15,7 @@ const Carousel = (props) => {
     let isInAnimation = false;
     //动画ID
     let reqId = 0;
-    const [list, setList] = useState(imgList);
+    const [list, setList] = useState(dataList);
     //初始化
     useEffect(()=>{
         carouselBodyRef.current.style.width = bgW + 'px';
@@ -24,8 +25,9 @@ const Carousel = (props) => {
         imgBodyRef.current.style.left = '0px';
         btnBodyRef.current.style.width = bgW + 'px';
         btnBodyRef.current.style.height = bgH + 'px';
+        const imgList = dataList.map(v=>v.imageUrl)
         setList(imgList);
-    },[bgW, bgH, imgLength, imgList])
+    },[bgW, bgH, imgLength, dataList])
 
     //定时器轮播
     /**
