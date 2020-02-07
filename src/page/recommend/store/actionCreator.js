@@ -5,10 +5,10 @@ export const changeBannerList = (data) => ({
   data : data
 })
   
-export const getBannerList = () => {
+export const getBannerList = (query) => {
   return (dispatch) =>{
     getBannerRequest ().then (data => {
-      dispatch (changeBannerList (data.banners.map(v=>v.imageUrl)));
+      dispatch (changeBannerList (data.banners.map(v=>v.imageUrl + query)));
     }).catch ((err) => {
       console.error (err,'banner error');
     }) 

@@ -114,7 +114,7 @@ const Carousel = (props) => {
         let leftNum = parseInt(imgBodyRef.current.style.left.replace(/px/,''));
         let nextPicIndex = parseInt(e.target.id.match(/[0-9]+/)[0]);
         setPicViewIndex(nextPicIndex);
-        playAnim(20,leftNum,nextPicIndex * bgW);
+        playAnim(20,leftNum,-nextPicIndex * bgW);
     }
     //在背景图变化时设置定时器
     useEffect(()=>{
@@ -130,7 +130,7 @@ const Carousel = (props) => {
                 return <div id={`img-${i}`} key={`${i}`} style={{
                     width:bgW,
                     height:bgH,
-                    backgroundImage:`url(${v}?param=${bgW}y${bgH})`,
+                    backgroundImage:`url(${v})`,
                 }}></div>
             })}
         </div>

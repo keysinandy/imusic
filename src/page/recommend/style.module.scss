@@ -1,0 +1,22 @@
+.bannerIcon {
+ display: flex;
+ justify-content: space-around;
+ margin-top: 10px;
+ .bannerItem {
+   display: flex;
+   flex-direction: column;
+   width: 20vw;
+   button {
+    width: 14vw;
+    height: 14vw;
+    border-radius: 10000px;
+    background-color: #4b5cc4;
+    color: #f2fdff;
+    margin: 0 auto;
+   }
+   i {
+    text-align: center;
+    margin-top: 10px;
+   }
+ }
+}

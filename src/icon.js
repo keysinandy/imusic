@@ -3,10 +3,13 @@ const icon = {
   me : '\ue601',
   account : '\ue66d',
   listen : '\ueb97',
-  rank : '\ue616',
+  rank : '\ue7bc',
   find : '\ue62b',
   left : '\ue609',
   right : '\ue608',
+  calendar : '\ue627',
+  songList : '\ue64b',
+  like : '\ue61a'
 }
 
 export default icon
