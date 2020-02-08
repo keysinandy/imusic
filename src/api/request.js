@@ -13,5 +13,5 @@ export const getRecommendSongList = (limit) => {
 
 //推荐新曲
 export const getRecommendNewSong = () => {
-  return axiosInstance.get ('/personalized/newsong');
+  return axiosInstance.get ('/personalized');
 }

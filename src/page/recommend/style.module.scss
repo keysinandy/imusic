@@ -1,6 +1,7 @@
 .recommend {
   margin-top: 8vh;
-  overflow: scroll;
+  // height: 92vh;
+  // overflow: scroll;
 }
 .bannerIcon {
  display: flex;
@@ -48,6 +49,7 @@
       .songListItemCover {
         width: 30vw;
         height: 30vw;
+        border-radius: 6px;
       }
       .songListPlayCount {
         position: absolute;

@@ -1,5 +1,5 @@
 import { actionType } from './actionType';
-import { getBannerRequest, getRecommendSongList } from '../../../api/request';
+import { getBannerRequest, getRecommendSongList, getRecommendNewSong } from '../../../api/request';
 export const changeBannerList = (data) => ({
   type : actionType.CHANGE_BANNER,
   data : data
@@ -10,6 +10,10 @@ export const changeSongList = (data) => ({
   data : data
 })
 
+export const changeNewSongList = (data) => ({
+  type : actionType.CHANGE_NEW_SONG_LIST,
+  data : data
+})
 export const getBannerList = (query) => {
   return (dispatch) =>{
     getBannerRequest ().then (data => {
@@ -27,6 +31,18 @@ export const getSongList = (query) => {
   return (dispatch) =>{
     getRecommendSongList ().then (data => {
       dispatch (changeSongList (data.result.map(v => {
+        v.imageUrl += query;
+        return v;
+      })));
+    }).catch ((err) => {
+      console.error (err,'banner error');
+    }) 
+  }
+}
+export const getNewSongList = (query) => {
+  return (dispatch) =>{
+    getRecommendNewSong ().then (data => {
+      dispatch (changeNewSongList (data.result.map(v => {
         v.imageUrl += query;
         return v;
       })));

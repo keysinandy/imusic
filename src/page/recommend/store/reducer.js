@@ -3,6 +3,7 @@ import { produce } from 'immer'
 const defaultState = {
   bannerList : [],
   songList : [],
+  newSongList : [],
 };
 
 const reducer = (state = defaultState,action) => {
@@ -11,10 +12,14 @@ const reducer = (state = defaultState,action) => {
       return produce(state,draft=>{
         draft.bannerList = action.data;
       });
-      case actionType.CHANGE_SONG_LIST:
-        return produce(state,draft=>{
-          draft.songList = action.data;
-        });
+    case actionType.CHANGE_SONG_LIST:
+      return produce(state,draft=>{
+        draft.songList = action.data;
+      });
+    case actionType.CHANGE_NEW_SONG_LIST:
+      return produce(state,draft=>{
+        draft.newSongList = action.data;
+      });
     default:
       return state;
   }
