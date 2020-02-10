@@ -9,7 +9,8 @@ const icon = {
   right : '\ue608',
   calendar : '\ue627',
   songList : '\ue64b',
-  like : '\ue61a'
+  like : '\ue61a',
+  musicIcon : '\ue66d',
 }
 
 export default icon

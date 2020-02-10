@@ -6,18 +6,20 @@ import Header from './page/header/Header';
 import Footer from './page/footer/Footer';
 import {Provider} from 'react-redux';
 import store from './store/store';
-import './App.css'
+import MyMessage from './page/myMessage/MyMessage'
+import './App.css';
 
 function App() {
   return (
     <Provider store={store}>
       <div className="App">
         <HashRouter>
-          <Header />
+          <MyMessage />
           <div>
+            <Header />
             {renderRoutes(route)}
+            <Footer />
           </div>
-          <Footer />
         </HashRouter>
       </div>
     </Provider>

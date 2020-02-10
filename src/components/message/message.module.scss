@@ -1,0 +1,28 @@
+.bg {
+  width: 100vw;
+  height: 100vh;
+  background-color: #0005;
+  z-index: 20000;
+  position: fixed;
+  top: 0;
+  .message {
+    display: flex;
+    justify-content: center;
+    align-items:center;  
+    border-radius: 6px;
+    width: 40vw;
+    height: 26vw;
+    position: absolute;
+    top: calc(50vh - 13vw);
+    left: calc(50vw - 20vw);
+    background-color: #0007;
+    .content {
+      font-size: 20px;
+      color: #eee;
+      white-space: pre-wrap;
+      white-space: normal;
+      word-break: break-all;
+      padding: 0 5px;
+    }
+  }
+}

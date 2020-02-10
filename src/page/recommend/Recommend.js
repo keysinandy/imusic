@@ -1,10 +1,10 @@
-import React, { useEffect, useCallback } from 'react';
+import React, { useEffect } from 'react';
 import Carousel from '../../components/carousel/Carousel';
 import * as actionTypes from './store/actionCreator';
 import { useSelector, useDispatch } from 'react-redux'
 import BannerIcon from './BannerIcon';
 import RecommendSongList from './RecommendSongList';
-import RecommendNewSong from './RecommendNewSong';
+// import RecommendNewSong from './RecommendNewSong';
 import Scroll from '../../components/scroll/Scroll';
 import style from './style.module.scss';
 const Recommend = (props) => {

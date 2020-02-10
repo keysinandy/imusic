@@ -1,0 +1,108 @@
+$bgColor : #ffa631;
+$wColor : #eee;
+$bColor : #333;
+.bg {
+  width: 100vw;
+  height: 100vh;
+  background-color : $bgColor;
+  position: relative;
+  z-index: 10000;
+  .icon {
+    color: $wColor;
+    text-align: center;
+    display: block;
+    font-size: 20vw;
+    padding-top: 30vh;
+  }
+  .btn {
+    width: 160px;
+    height: 50px;
+    margin: 0 auto;
+    display: block;
+    font-size: 18px;
+    border-radius: 1000px;
+  }
+  .positive {
+    background-color: $wColor;
+    color : $bgColor;
+    margin-top: 20vh;
+    @extend .btn
+  };
+
+  .negative {
+    background-color: $bgColor;
+    color : $wColor;
+    border : 2px $wColor solid;
+    margin-top: 20px;
+    @extend .btn
+  }
+}
+
+.phoneLoginBg {
+  width: 100vw;
+  height: 100vh;
+  background-color : $wColor;
+  position: relative;
+  z-index: 10001;
+  .backIcon {
+    color: $bColor;
+    position: relative;
+    top: 10px;
+  }
+  .title {
+    font-size: 20px;
+    color: $bColor;
+    position: relative;
+    text-align: center;
+    top: -10px;
+  }
+  .group {
+    .inputGroup {
+      border-bottom: 1px #888 solid;
+      width: 90vw;
+      margin: 0 auto;
+      margin-top: 10vh;
+      i {
+        font-size: 22px;
+        font-weight: 500;
+      }
+      input {
+        background-color: $wColor;
+        height: 22px;
+        font-size: 20px;
+        margin-left: 10px;
+      }
+    }
+    .reset {
+      width: 100px;
+      height: 30px;
+      margin: 0 auto;
+      display: block;
+      background-color: $wColor;
+      font-size: 18px;
+      text-decoration:underline;
+      margin-top: 10px;
+      color: #888;
+    }
+  }
+  
+  .nextBtn {
+    width: 60vw;
+    display: block;
+    margin: 0 auto;
+    margin-top: 30vh;
+
+    border-radius: 1000px;
+    color: $wColor;
+    font-size: 18px;
+    font-weight: bolder;
+  }
+  .nextActive {
+    @extend .nextBtn;
+    background-color: #f00056;
+  }
+  .next {
+    @extend .nextBtn;
+    background-color: #f0005644;
+  }
+}
