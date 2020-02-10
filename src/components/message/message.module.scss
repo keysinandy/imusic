@@ -1,3 +1,8 @@
+@keyframes spin {
+  100% {
+    transform: rotate(360deg)
+  }
+}
 .bg {
   width: 100vw;
   height: 100vh;
@@ -23,6 +28,27 @@
       white-space: normal;
       word-break: break-all;
       padding: 0 5px;
+    }
+  }
+  .loading {
+    display: flex;
+    justify-content: center;
+    align-items:center;  
+    border-radius: 6px;
+    width: 30vw;
+    height: 30vw;
+    position: absolute;
+    top: calc(50vh - 13vw);
+    left: calc(50vw - 20vw);
+    background-color: #0007;
+    transform: rotate(360deg);
+    .spinIcon {
+      i {
+        font-size: 36px;
+        color: #aaa;
+      }
+      animation: spin 1s linear;
+      animation-iteration-count: infinite;
     }
   }
 }

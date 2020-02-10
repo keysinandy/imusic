@@ -58,4 +58,5 @@ Message.defaultProps = {
   modifyFlag : true,
 }
 
+
 export default Message;

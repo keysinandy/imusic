@@ -6,7 +6,8 @@ import Header from './page/header/Header';
 import Footer from './page/footer/Footer';
 import {Provider} from 'react-redux';
 import store from './store/store';
-import MyMessage from './page/myMessage/MyMessage'
+import MyMessage from './page/myMessage/MyMessage';
+import MyLoading from './page/myMessage/MyLoading';
 import './App.css';
 
 function App() {
@@ -15,6 +16,7 @@ function App() {
       <div className="App">
         <HashRouter>
           <MyMessage />
+          <MyLoading />
           <div>
             <Header />
             {renderRoutes(route)}

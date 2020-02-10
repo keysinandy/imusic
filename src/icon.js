@@ -11,6 +11,7 @@ const icon = {
   songList : '\ue64b',
   like : '\ue61a',
   musicIcon : '\ue66d',
+  loading : '\ueb7b',
 }
 
 export default icon

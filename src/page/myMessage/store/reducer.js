@@ -3,6 +3,9 @@ import { produce } from 'immer'
 const defaultState = {
   messageProps : {
     modifyFlag : false
+  },
+  loadingProps : {
+    showFlag : false,
   }
 };
 
@@ -13,6 +16,10 @@ const reducer = (state = defaultState,action) => {
         let modifyFlag = !draft.messageProps.modifyFlag;
         draft.messageProps = {...action.data,modifyFlag};
       });
+      case actionType.CHANGE_LOADING:
+        return produce(state,draft=>{
+          draft.loadingProps = {...action.data};
+        });
     default:
       return state;
   }
