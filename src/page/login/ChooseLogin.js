@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import icon from '../../icon';
 import style from './login.module.scss';
-import { checkLogin } from '../../api/request'
+import { checkLogin, reFreshLogin } from '../../api/request'
 
 const ChooseLogin = (props) => {
   const [enterFlag,setEnterFlag] = useState('none');
@@ -14,6 +14,7 @@ const ChooseLogin = (props) => {
     checkLogin().then(res=>{
       if (res && res.code === 200) {
         //已登录
+        reFreshLogin();
         history.push('/recommend');
       } else {
         setEnterFlag('block');

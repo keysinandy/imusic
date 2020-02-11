@@ -11,6 +11,11 @@ export const checkLogin = () =>{
   return axiosInstance.get ('/login/status');
 
 }
+//刷新登录
+export const reFreshLogin = () =>{
+  return axiosInstance.get ('/login/refresh');
+
+}
 //轮播图
 export const getBannerRequest = () => {
   return axiosInstance.get ('/banner');
