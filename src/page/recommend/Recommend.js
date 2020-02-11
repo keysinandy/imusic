@@ -6,6 +6,7 @@ import BannerIcon from './BannerIcon';
 import RecommendSongList from './RecommendSongList';
 // import RecommendNewSong from './RecommendNewSong';
 import Scroll from '../../components/scroll/Scroll';
+import Header from '../header/Header';
 import style from './style.module.scss';
 const Recommend = (props) => {
   const { bannerList, songList } = useSelector(state => state.recommend);
@@ -31,6 +32,7 @@ const Recommend = (props) => {
     console.log(e,'handlePullDown');
   }
   return <div className={style.recommend}>
+    <Header />
     <Scroll outerStyle = {{height : '92vh'}} onScroll = {HandleScroll} pullUp = {handlePullUp} pullDown = {handlePullDown}>  
       <Carousel bgW = {width} bgH = {height} intervalTime={3000} dataList={dataList}/>
       <BannerIcon />
