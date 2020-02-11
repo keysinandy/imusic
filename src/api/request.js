@@ -31,3 +31,7 @@ export const getRecommendNewSong = () => {
   return axiosInstance.get ('/personalized');
 }
 
+//私人fm
+export const getPersonalFm = () => {
+  return axiosInstance.get ('/personal_fm');
+}

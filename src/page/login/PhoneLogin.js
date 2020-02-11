@@ -53,7 +53,7 @@ const PhoneLogin = (props) => {
     <h1 className = {style.title}>
       手机号登录
     </h1>
-    <div className={style.group}>
+    <form className={style.group}>
       <div className={style.inputGroup}>
         <i>+86</i>
         <input type="text" placeholder="输入手机号" ref={input} onChange = {handleInputChange}/>
@@ -63,7 +63,7 @@ const PhoneLogin = (props) => {
         <input type="password" ref={password} placeholder="输入密码" onChange = {handleInputChange}/>
       </div>
       <button className={style.reset}>重设密码</button>
-    </div>
+    </form>
     <button className={active ? style.nextActive : style.next} onClick = {handleNext}>下一步</button>
   </div>
 }

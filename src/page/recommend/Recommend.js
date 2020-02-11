@@ -16,7 +16,7 @@ const Recommend = (props) => {
   useEffect (() => {
     dispatch(actionTypes.getBannerList(query));
     dispatch(actionTypes.getSongList());
-    dispatch(actionTypes.getNewSongList())
+    dispatch(actionTypes.getNewSongList());
     // eslint-disable-next-line 
   }, []);
   const dataList = bannerList ? bannerList : [];
