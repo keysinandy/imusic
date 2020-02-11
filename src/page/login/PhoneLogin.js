@@ -24,8 +24,21 @@ const PhoneLogin = (props) => {
     let passwordValue = password.current.value;
     if (value.length > 0) {
       if(/^1[3456789]\d{9}$/.test(value)){ 
+        dispatch(actionTypes.showLoading,{
+          showFlag : true
+        })
         phoneLogin(value,passwordValue).then(data=>{
-          console.log(data)
+          dispatch(actionTypes.showLoading,{
+            showFlag : false
+          })
+          if (data.code === 200) {
+            //登录成功
+            history.push('/recommend')
+          } else {
+            dispatch(actionTypes.showMessage({
+              content : data.message
+            }))
+          }
         })
       } else {
         const data = {
