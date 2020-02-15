@@ -40,3 +40,8 @@ export const getRecommendNewSong = () => {
 export const getPersonalFm = () => {
   return axiosInstance.get ('/personal_fm');
 }
+
+//每日推荐
+export const getDailyRecommend = () => {
+  return axiosInstance.get ('/recommend/songs');
+}

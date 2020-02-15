@@ -1,0 +1,94 @@
+.banner {
+  height: 40vh;
+  width: 100vw;
+
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-color: #000000;
+  position: relative;
+  z-index: 10;
+  .bannerImage {
+    position: absolute;
+    z-index: -1;
+    height: 40vh;
+    width: 100vw;
+    background-image: url('../../assets/imgs/banner1.jpg');
+    opacity: 0.75;
+  }
+  .topBar {
+    display: flex;
+    justify-content: space-between;
+    button {
+      background-color: #0000;
+      color: #fff;
+    }
+  }
+  .firstTitle {
+    font-size: 30px;
+    margin-top: 10vh;
+    margin-left: 10px;
+    color: #fff;
+  }
+  .secondTitle {
+    font-size: 20px;
+    margin-top: 2vh;
+    margin-left: 10px;
+    color: #fff;
+  }
+}
+.playAll {
+  position: relative;
+  top: -7vh;
+  z-index: 100;
+  background-color: #eee;
+  border-top-left-radius: 24px;
+  border-top-right-radius: 24px;
+  .playAllBtn {
+    background-color: #0000;
+    margin-top: 1vh;
+    height: 7vh;
+  }
+}
+.listBg {
+  width: 100vw;
+  position: fixed;
+  top: 40vh;
+  background-color: #eee;
+    .playAllText {
+      font-size: 18px;
+    }
+    .icon {
+      font-size: 20px;
+    }
+  .list {
+    .listItem {
+      display: flex;
+      justify-content: flex-start;
+      align-items: center;
+      margin-top: 2vh;
+      .listPic {
+        width:15vw;
+        height: 15vw;
+        border-radius: 6px;
+        margin-left: 5vw;
+      }
+      .soundIcon {
+        color: #f05654;
+        margin-left: 3vw;
+      }
+      .sound {
+        margin-left: 3vw;
+        width: 60vw;
+        height : 15vw;
+        white-space: nowrap;
+        overflow: hidden;
+        .soundName {
+          margin-top: 5px;
+        }
+        .artist {
+          margin-top: 10px;
+        }
+      }
+    }
+  }
+}
