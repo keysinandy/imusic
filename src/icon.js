@@ -12,6 +12,10 @@ const icon = {
   like : '\ue61a',
   musicIcon : '\ue66d',
   loading : '\ueb7b',
+  more : '\ueb98',
+  play : '\ue606',
+  pause : '\ue60c',
+  sound : '\ue602',
 }
 
 export default icon

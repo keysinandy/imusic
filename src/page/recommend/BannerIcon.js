@@ -1,10 +1,15 @@
 import React from 'react';
 import icon from '../../icon';
-import style from './style.module.scss'
-const BannerIcon = () => {
+import style from './style.module.scss';
+import { useHistory } from 'react-router-dom'
+const BannerIcon = (props) => {
+  const history = useHistory();
+  const handleDailyRecommend = () =>{
+    history.push('/songList')
+  }
   return <ul className={style.bannerIcon}>
     <li className={style.bannerItem}>
-      <button className={style.bannerBtn}> 
+      <button className={style.bannerBtn} onClick={handleDailyRecommend}> 
         <i className="iconfont">{icon.calendar}</i> 
       </button>
       <i>每日推荐</i>
