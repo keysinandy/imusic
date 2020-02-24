@@ -45,3 +45,20 @@ export const getPersonalFm = () => {
 export const getDailyRecommend = () => {
   return axiosInstance.get ('/recommend/songs');
 }
+
+//获取歌词
+export const getLyric = (id) => {
+  return axiosInstance.get ('/lyric',{
+    params : {
+      id : id
+    }
+  });
+}
+//获取音乐url 获取到音乐的 id 后，将 https://music.163.com/song/media/outer/url?id=id.mp3 以 src 赋予 Audio 即可播放
+export const getSongUrl = (id) => {
+  return axiosInstance.get ('/song/url',{
+    params : {
+      id : id
+    }
+  });
+}

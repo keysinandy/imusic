@@ -3,7 +3,8 @@ import style from './songList.module.scss';
 import icon from '../../icon';
 import { useHistory } from 'react-router-dom';
 import { useSelector, useDispatch} from 'react-redux';
-import * as actionTypes from './store//actionCreator';
+import * as actionTypes from './store/actionCreator';
+import * as playerAction from '../player/store/actionCreator';
 import Scroll from '../../components/scroll/Scroll';
 const SongList = (props) => {
   const { firstTitle, secondTitle } = props;
@@ -15,12 +16,18 @@ const SongList = (props) => {
     history.goBack();
   }
   const handlePlay = (e) =>{
+    let song = songListData.filter(v=>v.id === parseInt(e.currentTarget.id));
+    if (song[0]) {
+      dispatch(playerAction.changeSongList(songListData));
+      dispatch(playerAction.changePlayingSong(song[0]));
+      dispatch(playerAction.addSong(song[0]));
+      dispatch(playerAction.showPlayer())
+    }
   }
   useEffect(() => {
     dispatch(actionTypes.getDailySongList())
   // eslint-disable-next-line react-hooks/exhaustive-deps
   },[]);
-
   const innerWidth = window.innerWidth;
   const listPicSize = Math.round(0.15 * innerWidth);
   return <div className={style.songList}>
@@ -45,7 +52,7 @@ const SongList = (props) => {
       <Scroll outerStyle = {{height : '70vh',position:'relative',zIndex:-100}}>
         <ul className={style.list}>
           {songListData.map(v=>{
-            return <li key={v.id} className={style.listItem} onClick={handlePlay}>
+            return <li id={v.id} key={v.id} className={style.listItem} onClick={handlePlay}>
               <div className={style.listPic} style={{
                 background:`url(${v.album.picUrl}?param=${listPicSize}y${listPicSize})`,
                 width :`${listPicSize}px`,

@@ -5,7 +5,7 @@ import Account from '../page/account/account';
 import Login from '../page/login/Login';
 import PhoneLogin from '../page/login/PhoneLogin';
 import ChooseLogin from '../page/login/ChooseLogin';
-import SongList from '../page/songList/songList';
+import SongList from '../page/songList/SongList';
 import { Redirect } from 'react-router-dom';
 
 export default [

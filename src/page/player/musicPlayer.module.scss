@@ -1,0 +1,104 @@
+.player {
+  width: 100vw;
+  height: 100vh;
+  position: fixed;
+  z-index: 1100;
+  top: 0px;
+  background-color: #0002;
+  .header {
+    display: flex;
+    justify-content: space-between;
+    z-index: 1200;
+    height: 10vh;
+    .backBtn {
+      background-color: #0000;
+      color: #fff;
+    }
+    .title {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-around;
+      align-items: center;  
+      .songName {
+        color: #fff;
+        font-size: 18px;
+      }
+      .artistName {
+        color: #eee;
+      }
+    }
+    .more {
+      background-color: #0000;
+      color: #fff;
+    }
+  }
+  .main {
+    width : 100vw;
+    height: 60vh;
+    padding: 5vh 0;
+    overflow: hidden;
+  }
+  .footer {
+    width : 100vw;
+    height: 20vh;
+    .range {
+      width: 100vw;
+      height: 18px;
+      display: flex;
+      justify-content: space-around;
+      .currentTime {
+        color: #eee;
+      }
+      .totalTime {
+        color: #eee;
+      }
+      .input {
+        -webkit-appearance: none;
+        width: 70vw;
+        height: 8px;
+        border-radius: 12px;
+        background-color: #aaaa;
+        margin: 0;
+        display: block;
+        position: relative;
+        margin-top: -8px;
+        &::-webkit-slider-thumb {
+          -webkit-appearance: none;
+          height: 14px;
+          width: 14px;
+          background: #ffa400; 
+          border-radius: 50%;
+          border: solid 3px #fff;
+        }
+        &::-webkit-slider-thumb:after {
+          left: 30px;
+          background: #d9d9d9;
+      }
+      }
+      .pre {
+        width: 70vw;
+        height: 8px;
+        border-radius: 12px;
+        position: relative;
+        margin-top: 5px;
+      }
+    }
+    .bottomIcon {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 20px;
+      button {
+        background-color: #0000;
+      }
+      i {
+        font-size: 36px;
+        color: #fff
+      }
+      .play {
+        i {
+          font-size: 52px;
+        }
+      }
+    }
+  }
+}

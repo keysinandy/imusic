@@ -16,6 +16,12 @@ const icon = {
   play : '\ue606',
   pause : '\ue60c',
   sound : '\ue602',
+  singleCircle :'\ue60a',
+  listCircle : '\ue64c',
+  randomCircle : '\ue60b',
+  prevSong : '\ue649',
+  nextSong : '\ue648',
+  playerSongList :'\ue636',
 }
 
 export default icon

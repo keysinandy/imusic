@@ -7,6 +7,7 @@ import {Provider} from 'react-redux';
 import store from './store/store';
 import MyMessage from './page/myMessage/MyMessage';
 import MyLoading from './page/myMessage/MyLoading';
+import MusicPlayer from './page/player/MusicPlayer';
 import './App.css';
 
 function App() {
@@ -16,6 +17,7 @@ function App() {
         <HashRouter>
           <MyMessage />
           <MyLoading />
+          <MusicPlayer />
           <div>
             {renderRoutes(route)}
             <Footer />
