@@ -6,6 +6,7 @@ import LyricList from '../../components/lyricList/LyricList';
 import * as messageAction from '../myMessage/store/actionCreator';
 import * as actionTypes from './store/actionCreator';
 import * as utils from '../../utils/utils';
+import Scroll from '../../components/scroll/Scroll';
 const MusicPlayer = () => {
   const { isHidden, currentSong, songList, currentSongIndex, currentSongUrl, currentSongLyric } = useSelector(state => state.player);
   const width = Math.ceil(window.innerWidth * 1.2);
@@ -23,6 +24,20 @@ const MusicPlayer = () => {
   const [circleType, setCircleType] = useState(CIRCLE_CONSTANTS.list);
   const [playState, setPlayState] = useState(true);
   const [currentSongTime, setCurrentSongTime] = useState(0);
+  const [songListShowState, setSongListShowState] = useState(false);
+  const [songSound, setSongSound] = useState(100);
+  const transCircleType = useCallback((type) => {
+    switch (type) {
+      case CIRCLE_CONSTANTS.list:
+        return '列表循环';
+      case CIRCLE_CONSTANTS.single:
+        return '单曲循环';
+      case CIRCLE_CONSTANTS.random:
+        return '随机播放';
+      default:
+        return '列表循环';
+    }
+  },[CIRCLE_CONSTANTS]);
   //切换音乐时播放音乐
   useEffect(()=>{
     if (currentSong) {
@@ -80,7 +95,7 @@ const MusicPlayer = () => {
     dispatch(actionTypes.changePlayingSong(songList[indexValue]));
     dispatch(actionTypes.changePlayingSongIndex(indexValue));
   }
-  const handleNext = () => {
+  const handleNext =  useCallback(() => {
     let length = songList.length;
     if (length < 2) {
       return ;
@@ -91,10 +106,9 @@ const MusicPlayer = () => {
     } else if (circleType === CIRCLE_CONSTANTS.random) {
       indexValue = Math.floor(Math.random() * length);
     }
-    
     dispatch(actionTypes.changePlayingSong(songList[indexValue]));
     dispatch(actionTypes.changePlayingSongIndex(indexValue));
-  }
+  },[songList,dispatch,CIRCLE_CONSTANTS,circleType,currentSongIndex])
   const handleTogglePlay = useCallback(() => {
     if (playState) {
       audio.current.pause();
@@ -103,9 +117,6 @@ const MusicPlayer = () => {
     }
     setPlayState(!playState);
   },[playState])
-  const handleShowSongList = () => {
-
-  }
 
   const handleAudioTimeUpdate = (e) =>{
     let ratio = e.target.currentTime / e.target.duration * 100;
@@ -131,6 +142,36 @@ const MusicPlayer = () => {
         break;
     }
   }
+
+  const handPlayMusicById = useCallback((id)=>{
+    return () => {
+      let result = songList.filter(v => v.id === id);
+      if (result.length > 0) {
+        dispatch(actionTypes.changePlayingSong(result[0]))
+      }
+    }
+  },[songList,dispatch])
+
+  const handleDelSongById = useCallback((id)=>{
+    return () => {
+      dispatch(actionTypes.minusSong(id));
+      if (id === currentSong.id) {
+        handleNext();
+      }
+    }
+  },[dispatch,currentSong,handleNext])
+
+  const handleSongListHide = useCallback(() => {
+    setSongListShowState(false);
+  },[]) 
+  const handleSongListShow = useCallback(() => {
+    setSongListShowState(true);
+  },[]) 
+
+  const handleSongSoundChange = useCallback((e)=>{
+    audio.current.volume = parseInt(e.target.value) / 100;
+    setSongSound(parseInt(e.target.value));
+  },[])
   return (<div hidden={isHidden}>
     <img src={currentSong ? currentSong.album.picUrl + `?param=${width}y${height}` : ''} alt=""  style={{
         width: '120vw',
@@ -155,7 +196,13 @@ const MusicPlayer = () => {
         </button>
       </header>
       <main className={style.main}>
-        <LyricList lyricString = {currentSongLyric} currentTime={currentSongTime} lyricId={currentSong ? currentSong.id : 0}/>
+        <div className={style.mainSound}>
+          <button className={style.soundBtn}><i className="iconfont">{songSound < 1 ? icon.silence : icon.sound}</i></button>
+          <input  className={style.soundBar} type="range" value={songSound} onChange={handleSongSoundChange}/>
+        </div>
+        <div className={style.mainLyric}>
+          <LyricList lyricString = {currentSongLyric} currentTime={currentSongTime} lyricId={currentSong ? currentSong.id : 0}/>
+        </div>
       </main>
       <footer className={style.footer}>
         <audio src={currentSongUrl} autoPlay ref={audio} onTimeUpdate={handleAudioTimeUpdate} onEnded={handleAudioEnded}>
@@ -179,9 +226,30 @@ const MusicPlayer = () => {
           <button onClick={handlePrev} className={style.prev}><i className="iconfont">{icon.prevSong}</i></button>
           <button onClick={handleTogglePlay} className={style.play}><i className="iconfont">{playState ? icon.play : icon.pause}</i></button>
           <button onClick={handleNext} className={style.next}><i className="iconfont">{icon.nextSong}</i></button>
-          <button onClick={handleShowSongList} className={style.songList}><i className="iconfont">{icon.playerSongList}</i></button>
+          <button onClick={handleSongListShow} className={style.songListIcon}><i className="iconfont">{icon.playerSongList}</i></button>
         </div>
       </footer>
+      <div className={style.songList} style={songListShowState ? {top: '40vh'} : {top: '100vh'}}>
+        <div className={style.listBg}>
+          <div className={style.listHeader}>
+            <button onClick={handleCircleClick} className={style.circleBtn}><i className="iconfont">{circleType} <i style={{fontSize:16}}>{transCircleType(circleType)}</i> </i></button>
+            <button className={style.listDown} onClick={handleSongListHide}><i className="iconfont">{icon.down}</i></button>
+          </div>
+          <Scroll outerStyle = {{height : '60vh',overflow:'hidden',width:'100vw'}}>
+            <ul className={style.list}>
+              {songList.map(v=>{
+                return <li id={v.id} key={v.id} className={style.listItem}>
+                    <div className={style.sound}>
+                      <i className="iconfont" hidden={currentSong ? currentSong.id !== v.id : true} style={{color:'#f05654'}}>{icon.sound}</i>
+                      <p className={`${style.soundName} noWarpLine`} style={currentSong && currentSong.id === v.id ? {color:'#f05654'} : {}} onClick={handPlayMusicById(v.id)}>{v.name}-{v.artists[0].name}</p>
+                      <button onClick={handleDelSongById(v.id)} className={style.delBtn}>×</button>
+                    </div>
+                </li>
+              })}
+            </ul>
+          </Scroll>
+        </div>
+      </div>
     </div>
   </div>)
 }

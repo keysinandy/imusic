@@ -2,12 +2,15 @@ import React from 'react';
 import icon from '../../icon';
 import SearchBar from '../../components/searchBar/SearchBar';
 import style from './header.module.scss';
-import { useDispatch } from 'react-redux';
+import { useDispatch,useStore } from 'react-redux';
 import * as playerAction from '../../page/player/store/actionCreator';
 const Header = (props) => {
   const dispatch = useDispatch();
+  const store = useStore();
   const handleListenClick = () => {
-    dispatch(playerAction.showPlayer())
+    if(store.getState().player.songList.length > 0) {
+      dispatch(playerAction.showPlayer())
+    }
   }
   return (
   <div className = {style.header}>

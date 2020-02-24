@@ -31,7 +31,7 @@ const reducer = (state = defaultState,action) => {
       });
     case actionType.MINUS_SONG:
       return produce(state,draft=>{
-        // draft.songList.push(action.data)
+        draft.songList = draft.songList.filter(v=>v.id !== action.data);
       });
     case actionType.HIDE_PLAYER:
       return produce(state,draft=>{

@@ -19,6 +19,7 @@
       flex-direction: column;
       justify-content: space-around;
       align-items: center;  
+      margin-top: 5px;
       .songName {
         color: #fff;
         font-size: 18px;
@@ -34,9 +35,41 @@
   }
   .main {
     width : 100vw;
-    height: 60vh;
-    padding: 5vh 0;
+    height: 70vh;
+    // padding: 5vh 0;
     overflow: hidden;
+    .mainSound {
+      height:10vh;
+      width: 100vw;
+      display: flex;
+      .soundBtn {
+        background-color: #0000;
+        color: #fff;
+      }
+      .soundBar {
+        -webkit-appearance: none;
+        width: 80vw;
+        height: 8px;
+        background-color: #808080;
+        border-radius: 3px;
+        align-self: center;
+        &::-webkit-slider-thumb {
+          -webkit-appearance: none;
+          height: 14px;
+          width: 14px;
+          background: #fff; 
+          border-radius: 50%;
+        }
+        &::-webkit-slider-thumb:after {
+          left: 30px;
+          background: #d9d9d9;
+        }
+      }
+    }
+    .mainLyric {
+      width: 100vw;
+      height:55vh;
+    }
   }
   .footer {
     width : 100vw;
@@ -73,7 +106,7 @@
         &::-webkit-slider-thumb:after {
           left: 30px;
           background: #d9d9d9;
-      }
+        }
       }
       .pre {
         width: 70vw;
@@ -99,6 +132,51 @@
           font-size: 52px;
         }
       }
+    }
+  }
+  .songList {
+    position: fixed;
+    top:40vh;
+    height: 60vh;
+    width: 100vw;
+    background-color: #fff;
+    border-top-left-radius: 12px;
+    border-top-right-radius: 12px;
+    .listBg {
+      position: relative;
+      .listHeader {
+        display: flex;
+        justify-content: space-between;
+      }
+      .list {
+        .listItem {
+          width: 90vw;
+          margin-left: 5vw;
+          .sound {
+            display: flex;
+            height: 30px;
+            padding: 6px 0;
+            border-top: #999999 1px solid;
+            justify-content: flex-start;
+            position: relative;
+            .soundName {
+              font-size: 16px;
+              line-height: 16px;
+              margin-left: 10px;
+              align-self: center;
+            }
+            .delBtn {
+              position: absolute;
+              right: 1vw;
+              font-size: 20px;
+              padding: 3px;
+              align-self: center;
+              color: #808080;
+            }
+          }
+        }
+      }
+     
     }
   }
 }

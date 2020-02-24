@@ -2,16 +2,16 @@ import React, { useEffect } from 'react';
 import style from './songList.module.scss';
 import icon from '../../icon';
 import { useHistory } from 'react-router-dom';
-import { useSelector, useDispatch} from 'react-redux';
+import { useSelector, useDispatch, useStore} from 'react-redux';
 import * as actionTypes from './store/actionCreator';
 import * as playerAction from '../player/store/actionCreator';
 import Scroll from '../../components/scroll/Scroll';
 const SongList = (props) => {
-  const { firstTitle, secondTitle } = props;
+  // const { firstTitle, secondTitle } = props;
   const { songListData } = useSelector(state => state.songList);
   const dispatch = useDispatch();
   const history = useHistory();
-
+  const store = useStore();
   const handleBack = () => {
     history.goBack();
   }
@@ -21,6 +21,11 @@ const SongList = (props) => {
       dispatch(playerAction.changeSongList(songListData));
       dispatch(playerAction.changePlayingSong(song[0]));
       dispatch(playerAction.addSong(song[0]));
+      dispatch(playerAction.showPlayer())
+    }
+  }
+  const handleListenClick = () => {
+    if(store.getState().player.songList.length > 0) {
       dispatch(playerAction.showPlayer())
     }
   }
@@ -35,13 +40,13 @@ const SongList = (props) => {
       <div className={style.bannerImage}></div>
       <div className={style.topBar}>
         <button onClick={handleBack}><i className="iconfont">{icon.left}</i></button>
-        <button><i className="iconfont">{icon.listen}</i></button>
+        <button onClick={handleListenClick}><i className="iconfont">{icon.listen}</i></button>
       </div>
       <h1 className={style.firstTitle}>
         每日推荐
       </h1>
       <h2 className={style.secondTitle}>
-        02/11
+        {new Date().getMonth()+1}/{new Date().getDate()}
       </h2>
     </div>
     <div className={style.playAll}>

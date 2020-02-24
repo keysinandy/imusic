@@ -50,12 +50,12 @@ a {
 }
 @font-face {
   font-family: 'iconfont';  /* project id 1625222 */
-  src: url('//at.alicdn.com/t/font_1625222_eo16lkvab89.eot');
-  src: url('//at.alicdn.com/t/font_1625222_eo16lkvab89.eot?#iefix') format('embedded-opentype'),
-  url('//at.alicdn.com/t/font_1625222_eo16lkvab89.woff2') format('woff2'),
-  url('//at.alicdn.com/t/font_1625222_eo16lkvab89.woff') format('woff'),
-  url('//at.alicdn.com/t/font_1625222_eo16lkvab89.ttf') format('truetype'),
-  url('//at.alicdn.com/t/font_1625222_eo16lkvab89.svg#iconfont') format('svg');
+  src: url('//at.alicdn.com/t/font_1625222_kvebzotme3.eot');
+  src: url('//at.alicdn.com/t/font_1625222_kvebzotme3.eot?#iefix') format('embedded-opentype'),
+  url('//at.alicdn.com/t/font_1625222_kvebzotme3.woff2') format('woff2'),
+  url('//at.alicdn.com/t/font_1625222_kvebzotme3.woff') format('woff'),
+  url('//at.alicdn.com/t/font_1625222_kvebzotme3.ttf') format('truetype'),
+  url('//at.alicdn.com/t/font_1625222_kvebzotme3.svg#iconfont') format('svg');
 }
 .iconfont {
   font-family:"iconfont" !important;
@@ -81,4 +81,9 @@ input:focus {
 body {
   overflow: hidden;
   background: #fff;;
+}
+.noWarpLine {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow:ellipsis;
 }
