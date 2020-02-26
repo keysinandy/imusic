@@ -21,7 +21,7 @@ const SongList = (props) => {
       dispatch(playerAction.changeSongList(songListData));
       dispatch(playerAction.changePlayingSong(song[0]));
       dispatch(playerAction.addSong(song[0]));
-      dispatch(playerAction.showPlayer())
+      dispatch(playerAction.showPlayer());
     }
   }
   const handleListenClick = () => {
@@ -35,6 +35,16 @@ const SongList = (props) => {
   },[]);
   const innerWidth = window.innerWidth;
   const listPicSize = Math.round(0.15 * innerWidth);
+
+  const handlePlayAll = () => {
+    let song = songListData[0]
+    if (song) {
+      dispatch(playerAction.changeSongList(songListData));
+      dispatch(playerAction.changePlayingSong(song));
+      dispatch(playerAction.addSong(song));
+      dispatch(playerAction.showPlayer());
+    }
+  }
   return <div className={style.songList}>
     <div className={style.banner}>
       <div className={style.bannerImage}></div>
@@ -50,11 +60,11 @@ const SongList = (props) => {
       </h2>
     </div>
     <div className={style.playAll}>
-      <button className={style.playAllBtn}><i className={`iconfont ${style.icon}`}>{icon.pause}</i><i className={style.playAllText}> 播放全部</i></button>
+      <button className={style.playAllBtn} onClick={handlePlayAll}><i className={`iconfont ${style.icon}`}>{icon.pause}</i><i className={style.playAllText}> 播放全部</i></button>
     </div>
     
     <div className={style.listBg}>
-      <Scroll outerStyle = {{height : '70vh',position:'relative',zIndex:-100}}>
+      <Scroll outerStyle = {{height : '50vh',position:'relative',zIndex:-100}}>
         <ul className={style.list}>
           {songListData.map(v=>{
             return <li id={v.id} key={v.id} className={style.listItem} onClick={handlePlay}>

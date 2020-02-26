@@ -13,6 +13,8 @@
     height: 40vh;
     width: 100vw;
     background-image: url('../../assets/imgs/banner1.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
     opacity: 0.75;
   }
   .topBar {
@@ -54,12 +56,12 @@
   position: fixed;
   top: 40vh;
   background-color: #eee;
-    .playAllText {
-      font-size: 18px;
-    }
-    .icon {
-      font-size: 20px;
-    }
+  .playAllText {
+    font-size: 18px;
+  }
+  .icon {
+    font-size: 20px;
+  }
   .list {
     .listItem {
       display: flex;

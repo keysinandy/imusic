@@ -7,6 +7,8 @@ import * as messageAction from '../myMessage/store/actionCreator';
 import * as actionTypes from './store/actionCreator';
 import * as utils from '../../utils/utils';
 import Scroll from '../../components/scroll/Scroll';
+import playerBg from '../../assets/imgs/playerBg.jpg';
+
 const MusicPlayer = () => {
   const { isHidden, currentSong, songList, currentSongIndex, currentSongUrl, currentSongLyric } = useSelector(state => state.player);
   const width = Math.ceil(window.innerWidth * 1.2);
@@ -172,16 +174,18 @@ const MusicPlayer = () => {
     audio.current.volume = parseInt(e.target.value) / 100;
     setSongSound(parseInt(e.target.value));
   },[])
-  return (<div hidden={isHidden}>
-    <img src={currentSong ? currentSong.album.picUrl + `?param=${width}y${height}` : ''} alt=""  style={{
-        width: '120vw',
-        height: '120vh',
-        position: 'fixed',
-        top: '-10vh',
-        left: '-10vw',
-        zIndex:1090,
-        filter:'blur(20px)',
-    }}/>
+
+  const imgStyle = {
+    width: '120vw',
+    height: '120vh',
+    position: 'fixed',
+    top: '-10vh',
+    left: '-10vw',
+    zIndex:1090,
+    filter:'blur(20px)',
+}
+  return (<div hidden={isHidden} >
+    <img src={currentSong ? currentSong.album.picUrl + `?param=${width}y${height}` : playerBg} alt=""  style={imgStyle}/>
     <div className={style.player}>
       <header className={style.header}>
         <button className={style.backBtn} onClick={handleHide}>
