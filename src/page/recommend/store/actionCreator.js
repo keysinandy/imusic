@@ -20,7 +20,7 @@ export const getBannerList = (query) => {
       dispatch (changeBannerList (data.banners.map(v => {
         v.imageUrl += query;
         return v;
-      })));
+      }).filter(v=>v.targetType === 1)));
     }).catch ((err) => {
       console.error (err,'banner error');
     }) 
@@ -39,6 +39,7 @@ export const getSongList = (query) => {
     }) 
   }
 }
+
 export const getNewSongList = (query) => {
   return (dispatch) =>{
     getRecommendNewSong ().then (data => {

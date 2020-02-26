@@ -1,5 +1,5 @@
 import { actionType } from './actionType';
-import { getLyric } from '../../../api/request';
+import { getLyric, getSongDetail } from '../../../api/request';
 export const changePlayingSong = (data) => ({
   type : actionType.CHANGE_PLAYING_SONG,
   data : data
@@ -42,6 +42,28 @@ export const getSongLyric = (id) => {
   return (dispatch) =>{
     getLyric(id).then (data => {
       dispatch (changeLyric(data.lrc.lyric));
+    }).catch ((err) => {
+      console.error (err,'Lyric error');
+    }) 
+  }
+}
+
+export const addSongById = (id) => {
+  return (dispatch) =>{
+    getSongDetail(id).then (data => {
+      let song = data.songs[0];
+      if (song.ar) {
+        song.artists = song.ar;
+      }
+      if (song.dt) {
+        song.duration = song.dt;
+      }
+
+      if (song.al) {
+        song.album = song.al;
+      }
+      dispatch(changePlayingSong(song));
+      dispatch(addSong(song));
     }).catch ((err) => {
       console.error (err,'Lyric error');
     }) 

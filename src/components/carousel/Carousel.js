@@ -3,7 +3,7 @@ import style from './carousel.module.scss';
 import icon from '../../icon';
 const Carousel = (props) => {
     // 图片数组，宽度、高度、自动切换图片的事件
-    const {dataList,bgW,bgH,intervalTime} = props;
+    const {dataList,bgW,bgH,intervalTime,clickHandler} = props;
     const imgList = dataList.map(v=>v.imageUrl)
     const imgLength = imgList.length;
     //视窗图片索引
@@ -91,6 +91,13 @@ const Carousel = (props) => {
             playAnim(20,leftNum,leftNum+bgW)
         }
     }
+
+    const handlePicClick = useCallback((e) => {
+        if (e.target === e.currentTarget && typeof clickHandler === 'function') {
+            clickHandler(picViewIndex);
+        }
+    },[clickHandler,picViewIndex]);
+
     const handleToNextPic = () => {
         //最右边向右边划
         if (picViewIndex === imgLength - 1) {
@@ -136,7 +143,7 @@ const Carousel = (props) => {
                 }}></div>
             })}
         </div>
-        <div className={style.btnBody} ref={btnBodyRef}>
+        <div className={style.btnBody} ref={btnBodyRef}  onClick={handlePicClick}>
             <button className={style.leftBtn} onClick = {handleToPrevPic}>
                 <i className="iconfont">{icon.left}</i>
             </button>

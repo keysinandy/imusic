@@ -62,3 +62,11 @@ export const getSongUrl = (id) => {
     }
   });
 }
+
+export const getSongDetail = (id) => {
+  return axiosInstance.get ('/song/detail',{
+    params : {
+      ids : id
+    }
+  });
+}
