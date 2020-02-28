@@ -12,7 +12,7 @@
     z-index: -1;
     height: 40vh;
     width: 100vw;
-    background-image: url('../../assets/imgs/banner1.jpg');
+    // background-image: url('../../assets/imgs/banner1.jpg');
     background-repeat: no-repeat;
     background-size: cover;
     opacity: 0.75;
@@ -45,10 +45,19 @@
   background-color: #eee;
   border-top-left-radius: 24px;
   border-top-right-radius: 24px;
+  display: flex;
+  justify-content: space-between;
   .playAllBtn {
     background-color: #0000;
     margin-top: 1vh;
     height: 7vh;
+  }
+  .subscribe {
+    background-color: #0000;
+    margin-right: 10px;
+    .subscribeIcon {
+      font-size: 18px
+    }
   }
 }
 .listBg {

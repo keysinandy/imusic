@@ -1,11 +1,15 @@
 import React from 'react';
 import icon from '../../icon';
 import style from './style.module.scss';
-import { useHistory } from 'react-router-dom'
+import { useHistory } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import * as songListAction from '../../page/songList/store/actionCreator';
 const BannerIcon = (props) => {
   const history = useHistory();
+  const dispatch = useDispatch();
   const handleDailyRecommend = () =>{
-    history.push('/songList')
+    dispatch(songListAction.getDailySongList());
+    history.push('/songList');
   }
   return <ul className={style.bannerIcon}>
     <li className={style.bannerItem}>

@@ -63,10 +63,20 @@ export const getSongUrl = (id) => {
   });
 }
 
+//歌曲详情
 export const getSongDetail = (id) => {
   return axiosInstance.get ('/song/detail',{
     params : {
       ids : id
+    }
+  });
+}
+
+//歌单详情
+export const getSongListDetail = (id) => {
+  return axiosInstance.get ('/playlist/detail',{
+    params : {
+      id : id
     }
   });
 }

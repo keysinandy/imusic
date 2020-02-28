@@ -183,7 +183,7 @@ const MusicPlayer = () => {
     left: '-10vw',
     zIndex:1090,
     filter:'blur(20px)',
-}
+  }
   return (<div hidden={isHidden} >
     <img src={currentSong ? currentSong.album.picUrl + `?param=${width}y${height}` : playerBg} alt=""  style={imgStyle}/>
     <div className={style.player}>

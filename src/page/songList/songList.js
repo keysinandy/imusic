@@ -6,9 +6,9 @@ import { useSelector, useDispatch, useStore} from 'react-redux';
 import * as actionTypes from './store/actionCreator';
 import * as playerAction from '../player/store/actionCreator';
 import Scroll from '../../components/scroll/Scroll';
+import bannerPic from '../../assets/imgs/banner1.jpg'
 const SongList = (props) => {
-  // const { firstTitle, secondTitle } = props;
-  const { songListData } = useSelector(state => state.songList);
+  const { songListData,firstTitle,secondTitle,isPlaylist,bannerPicUrl,playlistId,subscribed } = useSelector(state => state.songList);
   const dispatch = useDispatch();
   const history = useHistory();
   const store = useStore();
@@ -29,10 +29,7 @@ const SongList = (props) => {
       dispatch(playerAction.showPlayer())
     }
   }
-  useEffect(() => {
-    dispatch(actionTypes.getDailySongList())
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  },[]);
+
   const innerWidth = window.innerWidth;
   const listPicSize = Math.round(0.15 * innerWidth);
 
@@ -45,22 +42,31 @@ const SongList = (props) => {
       dispatch(playerAction.showPlayer());
     }
   }
+
+  const handleScribe = () => {
+    if (!subscribed) {
+      //TODO: 收藏与取消收藏
+    }
+  }
   return <div className={style.songList}>
     <div className={style.banner}>
-      <div className={style.bannerImage}></div>
+      <div className={style.bannerImage} style={{backgroundImage:`url(${bannerPicUrl ? bannerPicUrl : bannerPic})`}}></div>
       <div className={style.topBar}>
         <button onClick={handleBack}><i className="iconfont">{icon.left}</i></button>
         <button onClick={handleListenClick}><i className="iconfont">{icon.listen}</i></button>
       </div>
       <h1 className={style.firstTitle}>
-        每日推荐
+        {firstTitle}
       </h1>
       <h2 className={style.secondTitle}>
-        {new Date().getMonth()+1}/{new Date().getDate()}
+        {secondTitle}
       </h2>
     </div>
     <div className={style.playAll}>
       <button className={style.playAllBtn} onClick={handlePlayAll}><i className={`iconfont ${style.icon}`}>{icon.pause}</i><i className={style.playAllText}> 播放全部</i></button>
+      <button className={style.subscribe} onCanPlay={handleScribe} hidden={!isPlaylist}>
+        {subscribed ? '已收藏' : <i className={`iconfont ${style.subscribeIcon}`}>{icon.add} <i style={{fontSize:14}}>收藏</i></i>}
+      </button>
     </div>
     
     <div className={style.listBg}>

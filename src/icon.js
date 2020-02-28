@@ -24,6 +24,7 @@ const icon = {
   playerSongList :'\ue636',
   down : '\ue604',
   silence : '\ue61e',
+  add :'\ueb8f',
 }
 
 export default icon
