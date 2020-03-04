@@ -37,7 +37,7 @@ const Recommend = (props) => {
   const handleBannerClick = (index) =>{
     const state = store.getState();
     dispatch(playAction.addSongById(state.recommend.bannerList[index].targetId));
-    dispatch(playAction.showPlayer());
+    dispatch(playAction.showNormanPlayer());
   }
   return <div className={style.recommend}>
     <Header />

@@ -55,7 +55,7 @@ const Carousel = (props) => {
                 if (finishTime < times) {
                     reqId = requestAnimationFrame(()=>{
                         leftNum += moveLen;
-                        imgBodyRef.current.style.left = leftNum + 'px';
+                        imgBodyRef.current && (imgBodyRef.current.style.left = leftNum + 'px');
                         finishTime++;
                         moveTo();
                     })

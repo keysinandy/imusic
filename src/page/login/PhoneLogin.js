@@ -4,6 +4,7 @@ import style from './login.module.scss';
 import { useDispatch } from 'react-redux';
 import { phoneLogin } from '../../api/request';
 import * as actionTypes from '../myMessage/store/actionCreator';
+import * as meAction from '../me/store/actionCreator';
 
 const PhoneLogin = (props) => {
   const { history } = props;
@@ -31,6 +32,7 @@ const PhoneLogin = (props) => {
           dispatch(actionTypes.showLoading,{
             showFlag : false
           })
+          dispatch(meAction.initMe(data.profile.userId));
           if (data.code === 200) {
             //登录成功
             history.push('/recommend')

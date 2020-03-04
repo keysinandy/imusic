@@ -1,5 +1,5 @@
 import { actionType } from './actionType';
-import { getDailyRecommend,getSongListDetail } from '../../../api/request';
+import { getDailyRecommend, getSongListDetail, subscribeSongList } from '../../../api/request';
 
 export const showSongList = (data) => ({
   type : actionType.SHOW_SONG_LIST,
@@ -27,8 +27,13 @@ export const showSongListById = (data) => ({
 })
 export const setSubscribed = (data) => ({
   type : actionType.CHANGE_SUBSCRIBED,
-  data :data
+  data : data
 })
+export const setIsPersonalFm = (data) => ({
+  type : actionType.CHANGE_PERSONAL_FM,
+  data : data
+})
+
 export const getDailySongList = () => {
   return (dispatch) =>{
     getDailyRecommend().then(data => {
@@ -42,7 +47,7 @@ export const getDailySongList = () => {
         secondTitle : `${new Date().getMonth()+1}/${new Date().getDate()}`
       }));
     }).catch ((err) => {
-      console.error (err,'banner error');
+      console.error (err,'getDailySongList error');
     }) 
   }
 }
@@ -65,7 +70,21 @@ export const ShowSongListDetailById = (id) => {
         secondTitle : data.playlist.creator.nickname
       }))
     }).catch ((err) => {
-      console.error (err,'banner error');
+      console.error (err,'ShowSongListDetailById error');
     }) 
   }
 }
+export const setSongListSubscribe = (type,id) => {
+  return (dispatch) =>{
+    subscribeSongList(type,id).then(data => {
+      if (type === 1) {
+        dispatch(setSubscribed(true));
+      } else if (type === 2) {
+        dispatch(setSubscribed(false));
+      }
+    }).catch ((err) => {
+      console.error (err,'setSongListSubscribe error');
+    }) 
+  }
+}
+ 

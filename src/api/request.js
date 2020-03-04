@@ -38,7 +38,11 @@ export const getRecommendNewSong = () => {
 
 //私人fm
 export const getPersonalFm = () => {
-  return axiosInstance.get ('/personal_fm');
+  return axiosInstance.get ('/personal_fm',{
+    params:{
+      timestamp : new Date().getTime()
+    }
+  });
 }
 
 //每日推荐
@@ -77,6 +81,48 @@ export const getSongListDetail = (id) => {
   return axiosInstance.get ('/playlist/detail',{
     params : {
       id : id
+    }
+  });
+}
+//收藏、取消收藏歌单 type : 1 收藏  2 取消收藏
+export const subscribeSongList = (type,id) => {
+  return axiosInstance.get ('/playlist/subscribe',{
+    params : {
+      t : type,
+      id : id
+    }
+  });
+}
+
+//喜欢、不喜欢歌曲
+export const likeSong = (id,like = true) => {
+  return axiosInstance.get ('/like',{
+    params : {
+      id : id,
+      like : like
+    }
+  });
+}
+
+export const likeList = (uid) => {
+  return axiosInstance.get ('/likeList',{
+    params : {
+      uid : uid,
+    }
+  });
+}
+
+export const userDetail = (uid) => {
+  return axiosInstance.get ('/user/detail',{
+    params : {
+      uid : uid,
+    }
+  });
+}
+export const fmTrash = (id) => {
+  return axiosInstance.get ('/fm_trash',{
+    params : {
+      id : id,
     }
   });
 }

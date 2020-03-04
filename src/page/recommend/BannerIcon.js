@@ -4,12 +4,19 @@ import style from './style.module.scss';
 import { useHistory } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import * as songListAction from '../../page/songList/store/actionCreator';
+import * as playerAction from '../../page/player/store/actionCreator';
 const BannerIcon = (props) => {
   const history = useHistory();
   const dispatch = useDispatch();
-  const handleDailyRecommend = () =>{
+  const handleDailyRecommend = () => {
     dispatch(songListAction.getDailySongList());
+    dispatch(playerAction.changeIsPersonalFm(false));
     history.push('/songList');
+  }
+  const handlePersonalFm = () => {
+    dispatch(playerAction.changePersonalSongList());
+    dispatch(playerAction.showPersonalFmPlayer());
+    
   }
   return <ul className={style.bannerIcon}>
     <li className={style.bannerItem}>
@@ -31,7 +38,7 @@ const BannerIcon = (props) => {
       <i>排行榜</i>
     </li>
     <li className={style.bannerItem}>
-      <button className={style.bannerBtn}>
+      <button className={style.bannerBtn} onClick={handlePersonalFm}>
         <i className="iconfont">{icon.like}</i> 
       </button>
       <i>猜你喜欢</i>

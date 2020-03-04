@@ -25,6 +25,7 @@ const icon = {
   down : '\ue604',
   silence : '\ue61e',
   add :'\ueb8f',
+  trash : '\ue651'
 }
 
 export default icon

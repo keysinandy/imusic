@@ -5,5 +5,6 @@ export const actionType = {
   CHANGE_IS_PLAYLIST : 'songList/changeIsPlaylist',
   CHANGE_BANNER : 'songList/changeBanner',
   CHANGE_PLAYLIST_ID : 'songList/changePlaylistId',
-  CHANGE_SUBSCRIBED : 'songList/changeSubscribed'
+  CHANGE_SUBSCRIBED : 'songList/changeSubscribed',
+  CHANGE_PERSONAL_FM : 'songList/changePersonalFm'
 }

@@ -1,19 +1,22 @@
 import React, { useState, useRef, useEffect, useCallback } from 'react';
 import style from './musicPlayer.module.scss';
 import icon from '../../icon';
-import { useSelector, useDispatch } from 'react-redux';
+import { useSelector, useDispatch, useStore } from 'react-redux';
 import LyricList from '../../components/lyricList/LyricList';
 import * as messageAction from '../myMessage/store/actionCreator';
 import * as actionTypes from './store/actionCreator';
+import * as meActions from '../me/store/actionCreator';
 import * as utils from '../../utils/utils';
 import Scroll from '../../components/scroll/Scroll';
 import playerBg from '../../assets/imgs/playerBg.jpg';
-
+import { fmTrash } from '../../api/request'
 const MusicPlayer = () => {
-  const { isHidden, currentSong, songList, currentSongIndex, currentSongUrl, currentSongLyric } = useSelector(state => state.player);
+  const { isHidden, currentSong, songList, currentSongIndex, currentSongUrl, currentSongLyric, isPersonalFm,isCurrentSongLiked } = useSelector(state => state.player);
+
   const width = Math.ceil(window.innerWidth * 1.2);
   const height = Math.ceil(window.innerHeight * 1.2);
   const dispatch = useDispatch();
+  const store = useStore();
   const range = useRef();
   const audio = useRef();
   const CIRCLE_CONSTANTS = {
@@ -28,6 +31,7 @@ const MusicPlayer = () => {
   const [currentSongTime, setCurrentSongTime] = useState(0);
   const [songListShowState, setSongListShowState] = useState(false);
   const [songSound, setSongSound] = useState(100);
+  
   const transCircleType = useCallback((type) => {
     switch (type) {
       case CIRCLE_CONSTANTS.list:
@@ -45,16 +49,19 @@ const MusicPlayer = () => {
     if (currentSong) {
       dispatch(actionTypes.changeSongUrl(currentSong.id));
       dispatch(actionTypes.getSongLyric(currentSong.id));
-      // audio.current.load();
+      if (isSongInLikeList(currentSong.id)) {
+        dispatch(actionTypes.changeIsCurrentSongLiked(true));
+      } else {
+        dispatch(actionTypes.changeIsCurrentSongLiked(false));
+      }
+      setPlayState(true);
     }
   // eslint-disable-next-line react-hooks/exhaustive-deps
   },[currentSong])
   const handleHide = useCallback(() => {
     dispatch(actionTypes.hidePlayer());
   },[dispatch]);
-  const handleShowList = () => {
 
-  };
   //进度条变化
   const handleRangeChange = useCallback(() => {
     setRangeValue(parseInt(range.current.value));
@@ -97,6 +104,22 @@ const MusicPlayer = () => {
     dispatch(actionTypes.changePlayingSong(songList[indexValue]));
     dispatch(actionTypes.changePlayingSongIndex(indexValue));
   }
+  const handlePersonalPrev = () => {
+    let length = songList.length;
+    if (length < 2) {
+      return ;
+    }
+    let indexValue = 0;
+    if (indexValue === 0) {
+      indexValue = 0;
+      dispatch(actionTypes.changePersonalSongList());
+    } else {
+      indexValue = currentSongIndex - 1;
+      dispatch(actionTypes.changePlayingSong(songList[indexValue]));
+      dispatch(actionTypes.changePlayingSongIndex(indexValue));
+    }
+  }
+  
   const handleNext =  useCallback(() => {
     let length = songList.length;
     if (length < 2) {
@@ -111,6 +134,23 @@ const MusicPlayer = () => {
     dispatch(actionTypes.changePlayingSong(songList[indexValue]));
     dispatch(actionTypes.changePlayingSongIndex(indexValue));
   },[songList,dispatch,CIRCLE_CONSTANTS,circleType,currentSongIndex])
+
+  const handlePersonalNext =  useCallback(() => {
+    let length = songList.length;
+    if (length < 2) {
+      return ;
+    }
+    let indexValue = 0;
+    if (currentSongIndex === length - 1) {
+      indexValue = 0;
+      dispatch(actionTypes.changePersonalSongList())
+    } else {
+      indexValue = currentSongIndex + 1
+      dispatch(actionTypes.changePlayingSong(songList[indexValue]));
+      dispatch(actionTypes.changePlayingSongIndex(indexValue));
+    }
+
+  },[songList,dispatch,currentSongIndex])
   const handleTogglePlay = useCallback(() => {
     if (playState) {
       audio.current.pause();
@@ -158,6 +198,7 @@ const MusicPlayer = () => {
     return () => {
       dispatch(actionTypes.minusSong(id));
       if (id === currentSong.id) {
+        audio.current.pause();
         handleNext();
       }
     }
@@ -175,6 +216,40 @@ const MusicPlayer = () => {
     setSongSound(parseInt(e.target.value));
   },[])
 
+  const isSongInLikeList = useCallback((id)=>{
+    let value = 0;
+    for (const item of store.getState().me.likeSongList) {
+      if (id === item) {
+        value += 1;
+      }
+    }
+    if (value > 0) {
+      return true;
+    } else {
+      return false;
+    }
+  },[store])
+
+  const handleLike = useCallback(()=>{
+    if (currentSong) {
+      let id = currentSong.id;
+      if (isSongInLikeList(id)) {
+        dispatch(actionTypes.changeIsCurrentSongLiked(false));
+        dispatch(meActions.unLike(id));
+      } else {
+        dispatch(actionTypes.changeIsCurrentSongLiked(true));
+        dispatch(meActions.like(id))
+      }
+    }
+  },[currentSong, dispatch, isSongInLikeList])
+
+  const handleTrash = () => {
+    if (currentSong) {
+      fmTrash(currentSong.id).then(data=>{
+        handlePersonalNext();
+      })
+    }
+  }
   const imgStyle = {
     width: '120vw',
     height: '120vh',
@@ -195,8 +270,8 @@ const MusicPlayer = () => {
           <p className={style.songName}>{currentSong ? currentSong.name : ''}</p>
           <p className={style.artistName}>{currentSong ? currentSong.artists[0].name : ''}</p>
         </div>
-        <button className={style.more} onClick={handleShowList}>
-          <i className="iconfont">{icon.more}</i>
+        <button className={style.more} onClick={handleSongListShow}>
+          <i className="iconfont">{icon.songList}</i>
         </button>
       </header>
       <main className={style.main}>
@@ -226,11 +301,12 @@ const MusicPlayer = () => {
           <p className={style.totalTime}>{currentSong ? utils.mill2mmss(currentSong.duration) : '00:00'}</p>
         </div>
         <div className={style.bottomIcon}>
-          <button onClick={handleCircleClick} className={style.circleBtn}><i className="iconfont">{circleType}</i></button>
-          <button onClick={handlePrev} className={style.prev}><i className="iconfont">{icon.prevSong}</i></button>
+          <button onClick={handleCircleClick} className={style.circleBtn} hidden={isPersonalFm}><i className="iconfont">{circleType}</i></button>
+          <button onClick={handleTrash} className={style.songListIcon} hidden={!isPersonalFm}><i className="iconfont">{icon.trash}</i></button>
+          <button onClick={isPersonalFm ? handlePersonalPrev : handlePrev} className={style.prev}><i className="iconfont">{icon.prevSong}</i></button>
           <button onClick={handleTogglePlay} className={style.play}><i className="iconfont">{playState ? icon.play : icon.pause}</i></button>
-          <button onClick={handleNext} className={style.next}><i className="iconfont">{icon.nextSong}</i></button>
-          <button onClick={handleSongListShow} className={style.songListIcon}><i className="iconfont">{icon.playerSongList}</i></button>
+          <button onClick={isPersonalFm ? handlePersonalNext : handleNext} className={style.next}><i className="iconfont">{icon.nextSong}</i></button>
+          <button onClick={handleLike} className={style.songListIcon} ><i className="iconfont" style={isCurrentSongLiked ? {color:'#f05654'} : {color:'#fff'} }>{icon.like}</i></button>
         </div>
       </footer>
       <div className={style.songList} style={songListShowState ? {top: '40vh'} : {top: '100vh'}}>

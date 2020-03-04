@@ -22,7 +22,7 @@ export const getBannerList = (query) => {
         return v;
       }).filter(v=>v.targetType === 1)));
     }).catch ((err) => {
-      console.error (err,'banner error');
+      console.error (err,'getBannerList error');
     }) 
   }
 }
@@ -35,7 +35,7 @@ export const getSongList = (query) => {
         return v;
       })));
     }).catch ((err) => {
-      console.error (err,'banner error');
+      console.error (err,'getSongList error');
     }) 
   }
 }
@@ -48,7 +48,7 @@ export const getNewSongList = (query) => {
         return v;
       })));
     }).catch ((err) => {
-      console.error (err,'banner error');
+      console.error (err,'getNewSongList error');
     }) 
   }
 }

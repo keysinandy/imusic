@@ -7,7 +7,8 @@ const defaultState = {
   isPlaylist : false,
   bannerPicUrl : '',
   playlistId : -1,
-  subscribed : false
+  subscribed : false,
+  isPersonFm : false,
 };
 
 const reducer = (state = defaultState,action) => {

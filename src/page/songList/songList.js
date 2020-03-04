@@ -21,12 +21,13 @@ const SongList = (props) => {
       dispatch(playerAction.changeSongList(songListData));
       dispatch(playerAction.changePlayingSong(song[0]));
       dispatch(playerAction.addSong(song[0]));
-      dispatch(playerAction.showPlayer());
+      dispatch(playerAction.showNormanPlayer());
+      
     }
   }
   const handleListenClick = () => {
     if(store.getState().player.songList.length > 0) {
-      dispatch(playerAction.showPlayer())
+      dispatch(playerAction.showNormanPlayer())
     }
   }
 
@@ -39,13 +40,15 @@ const SongList = (props) => {
       dispatch(playerAction.changeSongList(songListData));
       dispatch(playerAction.changePlayingSong(song));
       dispatch(playerAction.addSong(song));
-      dispatch(playerAction.showPlayer());
+      dispatch(playerAction.showNormanPlayer());
     }
   }
 
   const handleScribe = () => {
-    if (!subscribed) {
-      //TODO: 收藏与取消收藏
+    if (subscribed) {
+      dispatch(actionTypes.setSongListSubscribe(2,playlistId))
+    } else {
+      dispatch(actionTypes.setSongListSubscribe(1,playlistId))
     }
   }
   return <div className={style.songList}>
@@ -64,8 +67,8 @@ const SongList = (props) => {
     </div>
     <div className={style.playAll}>
       <button className={style.playAllBtn} onClick={handlePlayAll}><i className={`iconfont ${style.icon}`}>{icon.pause}</i><i className={style.playAllText}> 播放全部</i></button>
-      <button className={style.subscribe} onCanPlay={handleScribe} hidden={!isPlaylist}>
-        {subscribed ? '已收藏' : <i className={`iconfont ${style.subscribeIcon}`}>{icon.add} <i style={{fontSize:14}}>收藏</i></i>}
+      <button className={style.subscribe} onClick={handleScribe} hidden={!isPlaylist}>
+        {subscribed ? '取消收藏' : <i className={`iconfont ${style.subscribeIcon}`}>{icon.add} <i style={{fontSize:14}}>收藏</i></i>}
       </button>
     </div>
     

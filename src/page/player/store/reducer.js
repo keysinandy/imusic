@@ -7,7 +7,9 @@ const defaultState = {
   isHidden : true,
   currentSongUrl : '',
   currentSongLyric : '',
-  currentSongIndex :0,
+  currentSongIndex : 0,
+  isPersonalFm : false,
+  isCurrentSongLiked : false,
 };
 
 const songUrlPrev = `https://music.163.com/song/media/outer/url`;
@@ -52,6 +54,14 @@ const reducer = (state = defaultState,action) => {
     case actionType.CHANGE_PLAYING_SONG_INDEX:
       return produce(state,draft=>{
         draft.currentSongIndex = action.data;
+      })
+    case actionType.CHANGE_IS_PERSONAL_FM:
+      return produce(state,draft=>{
+        draft.isPersonalFm = action.data;
+      })
+    case actionType.CHANGE_IS_CURRENT_SONG_LIKED:
+      return produce(state,draft=>{
+        draft.isCurrentSongLiked = action.data;
       })
     default:
       return state;

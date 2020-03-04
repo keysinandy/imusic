@@ -8,4 +8,6 @@ export const actionType = {
   HIDE_PLAYER : 'player/hidePlayer',
   CHANGE_LYRIC: 'player/changeLyric',
   CHANGE_SONG_URL : 'player/changSongUrl',
+  CHANGE_IS_PERSONAL_FM : 'player/changeIsPersonalFm',
+  CHANGE_IS_CURRENT_SONG_LIKED: 'player/changeIsCurrentSongLiked',
 }
