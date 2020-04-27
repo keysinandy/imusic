@@ -35,7 +35,7 @@ const PhoneLogin = (props) => {
           dispatch(meAction.initMe(data.profile.userId));
           if (data.code === 200) {
             //登录成功
-            history.push('/recommend')
+            history.push('/recommend/index')
           } else {
             dispatch(actionTypes.showMessage({
               content : data.message

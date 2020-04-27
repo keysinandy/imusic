@@ -4,9 +4,17 @@ import style from './style.module.scss';
 import FooterItem from '../../components/footerItem/FooterItem';
 import icon from '../../icon';
 const Footer = () => {
+  const handleRecommendActive = (match,location) => {
+    const regex = /\/recommend/;
+    if (regex.test(location.pathname)) {
+      return true;
+    } else {
+      return false;
+    }
+  }
   return (
     <div className={style.footer}>
-      <NavLink exact to="/recommend" activeClassName={style.active} className={style.noActive}>
+      <NavLink exact to="/recommend/index" isActive={handleRecommendActive} activeClassName={style.active} className={style.noActive}>
         <FooterItem iconNumber={icon.find} iconText='推荐'/>
       </NavLink>
       <NavLink to="/me" activeClassName={style.active} className={style.noActive}>

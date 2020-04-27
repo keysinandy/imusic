@@ -6,6 +6,8 @@ import Login from '../page/login/Login';
 import PhoneLogin from '../page/login/PhoneLogin';
 import ChooseLogin from '../page/login/ChooseLogin';
 import SongList from '../page/songList/SongList';
+import RecommendIndex from '../page/recommend/RecommendIndex';
+import PlayList from '../page/playList/PlayList';
 import { Redirect } from 'react-router-dom';
 
 export default [
@@ -19,6 +21,20 @@ export default [
   {
     path : '/recommend',
     component : Recommend,
+    routes : [
+      {
+        path : '/recommend/index',
+        component : RecommendIndex,
+      },
+      {
+        path : '/recommend/songList',
+        component : SongList
+      },
+      {
+        path : '/recommend/playList',
+        component : PlayList
+      }
+    ]
   },
   {
     path : '/me',

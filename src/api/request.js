@@ -104,6 +104,7 @@ export const likeSong = (id,like = true) => {
   });
 }
 
+//喜欢的歌曲列表
 export const likeList = (uid) => {
   return axiosInstance.get ('/likeList',{
     params : {
@@ -111,7 +112,7 @@ export const likeList = (uid) => {
     }
   });
 }
-
+//用户详情
 export const userDetail = (uid) => {
   return axiosInstance.get ('/user/detail',{
     params : {
@@ -119,10 +120,24 @@ export const userDetail = (uid) => {
     }
   });
 }
+//私人fm 垃圾桶
 export const fmTrash = (id) => {
   return axiosInstance.get ('/fm_trash',{
     params : {
       id : id,
+    }
+  });
+}
+//获取热门歌单tag
+export const getHotPlaylist = (id) => {
+  return axiosInstance.get ('/playlist/hot');
+}
+//根据tag获取歌单
+export const getPlaylistByTag = (limit=9,tag) => {
+  return axiosInstance.get ('/top/playlist',{
+    params:{
+      limit : limit,
+      order : tag
     }
   });
 }

@@ -11,12 +11,14 @@ const BannerIcon = (props) => {
   const handleDailyRecommend = () => {
     dispatch(songListAction.getDailySongList());
     dispatch(playerAction.changeIsPersonalFm(false));
-    history.push('/songList');
+    history.push('/recommend/songList');
   }
   const handlePersonalFm = () => {
     dispatch(playerAction.changePersonalSongList());
     dispatch(playerAction.showPersonalFmPlayer());
-    
+  }
+  const handleEnterPlayList = () => {
+    history.push('/recommend/playList');
   }
   return <ul className={style.bannerIcon}>
     <li className={style.bannerItem}>
@@ -26,7 +28,7 @@ const BannerIcon = (props) => {
       <i>每日推荐</i>
     </li>
     <li className={style.bannerItem}>
-      <button className={style.bannerBtn}>
+      <button className={style.bannerBtn} onClick={handleEnterPlayList}>
         <i className="iconfont">{icon.songList}</i> 
       </button>
       <i>歌单</i>

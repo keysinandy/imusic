@@ -11,7 +11,7 @@ const ChooseLogin = (props) => {
   const dispatch = useDispatch();
   //直接进入
   const handleEnter = () => {
-    history.push('/recommend');
+    history.push('/recommend/index');
   }
   useEffect(()=>{
     checkLogin().then(res=>{
@@ -19,7 +19,7 @@ const ChooseLogin = (props) => {
         //已登录
         reFreshLogin();
         dispatch(meAction.initMe(res.profile.userId));
-        history.push('/recommend');
+        history.push('/recommend/index');
       } else {
         setEnterFlag('block');
       }
