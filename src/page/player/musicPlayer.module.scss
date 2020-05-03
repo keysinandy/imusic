@@ -1,3 +1,11 @@
+.imgBg {
+  width: 100vw;
+  height: 100vh;
+  background-color: #999999;
+  z-index: 1089;
+  position: fixed;
+  top: 0px;
+}
 .player {
   width: 100vw;
   height: 100vh;
@@ -23,9 +31,19 @@
       .songName {
         color: #fff;
         font-size: 18px;
+        width: 60vw;
+        text-align: center;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
       }
       .artistName {
         color: #eee;
+        width: 60vw;
+        text-align: center;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
       }
     }
     .more {
@@ -69,6 +87,14 @@
     .mainLyric {
       width: 100vw;
       height:55vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      .circlePic {
+        width: 100%;
+        height: 100%;
+        border-radius: 100%;
+      }
     }
   }
   .footer {
@@ -147,6 +173,12 @@
       .listHeader {
         display: flex;
         justify-content: space-between;
+        .circleBtn {
+          background-color: transparent;
+        }
+        .listDown {
+          background-color: transparent;
+        }
       }
       .list {
         .listItem {
@@ -159,6 +191,10 @@
             border-top: #999999 1px solid;
             justify-content: flex-start;
             position: relative;
+            i {
+              position: relative;
+              top: 10%;
+            }
             .soundName {
               font-size: 16px;
               line-height: 16px;

@@ -10,7 +10,7 @@ const changeValue = (valueStr) => {
 }
 
 const LyricList = (props) => {
-  const { lyricString, currentTime, lyricId } = props;
+  const { lyricString, currentTime, lyricId, isVisible, clickHandler } = props;
   const [totalLyric,setTotalLyric] = useState([]);
   const container = useRef();
   const OFFSET_LINE = 26;
@@ -58,7 +58,7 @@ const LyricList = (props) => {
     };
     container.current.scrollTop = Math.max(0,index - BASE_LINE) * OFFSET_LINE;
   },[currentTime,totalLyric])
-  return (<div className={style.list} ref={container}>
+  return (<div className={style.list} ref={container} hidden={!isVisible} onClick = {clickHandler}>
     {totalLyric.map(value => {
       return <p className={`${style.item} `.concat(currentTime > value.time ? `${style.current}` : '') } key={`${lyricId}_${value.time}_${value.value.slice(0,4)}`}  data-time={value.time}>{value.value}</p>
     })}

@@ -8,6 +8,7 @@ import * as actionTypes from './store/actionCreator';
 import * as meActions from '../me/store/actionCreator';
 import * as utils from '../../utils/utils';
 import Scroll from '../../components/scroll/Scroll';
+import CircleProgress from '../../components/circleProgress/circleProgress'
 import playerBg from '../../assets/imgs/playerBg.jpg';
 import { fmTrash } from '../../api/request'
 const MusicPlayer = () => {
@@ -15,6 +16,8 @@ const MusicPlayer = () => {
 
   const width = Math.ceil(window.innerWidth * 1.2);
   const height = Math.ceil(window.innerHeight * 1.2);
+
+  let circleRadius = Math.ceil(window.innerWidth * 0.8)
   const dispatch = useDispatch();
   const store = useStore();
   const range = useRef();
@@ -31,6 +34,7 @@ const MusicPlayer = () => {
   const [currentSongTime, setCurrentSongTime] = useState(0);
   const [songListShowState, setSongListShowState] = useState(false);
   const [songSound, setSongSound] = useState(100);
+  const [lyricVisible, setLyricVisible] = useState(false)
   
   const transCircleType = useCallback((type) => {
     switch (type) {
@@ -250,6 +254,10 @@ const MusicPlayer = () => {
       })
     }
   }
+
+  const toggleLyricVisible = () =>{
+    setLyricVisible(!lyricVisible);
+  }
   const imgStyle = {
     width: '120vw',
     height: '120vh',
@@ -280,7 +288,10 @@ const MusicPlayer = () => {
           <input  className={style.soundBar} type="range" value={songSound} onChange={handleSongSoundChange}/>
         </div>
         <div className={style.mainLyric}>
-          <LyricList lyricString = {currentSongLyric} currentTime={currentSongTime} lyricId={currentSong ? currentSong.id : 0}/>
+          <LyricList isVisible={lyricVisible} clickHandler = {toggleLyricVisible} lyricString = {currentSongLyric} currentTime={currentSongTime} lyricId={currentSong ? currentSong.id : 0}/>
+          <CircleProgress progress = {rangeValue/100} radius={circleRadius} isVisible={!lyricVisible}>
+            <img src={currentSong ? currentSong.album.picUrl + `?param=${circleRadius}y${circleRadius}` : ''} alt="" className={style.circlePic} onClick={toggleLyricVisible}/>
+          </CircleProgress>
         </div>
       </main>
       <footer className={style.footer}>

@@ -1,6 +1,6 @@
 .list {
-  display: flex;
-  flex-direction: column;
+  // display: flex;
+  // flex-direction: column;
   height: 100%;
   overflow-y: scroll;
   &::-webkit-scrollbar {
@@ -28,6 +28,12 @@
     margin-top: 10px;
     font-size: 16px;
     color: #808080;
+    width: 80vw;
+    // line-height: 32px;
+    margin-left: 10vw;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
   }
   .current {
     color: #ffffff;
