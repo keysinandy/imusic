@@ -34,6 +34,23 @@
   input[type="radio"]{
     width: 17px;
     height: 17px;
-    background-color: #fff;
+    background-color: inherit;
+    appearance: none;
+  }
+  input[type="radio"]:before{
+    width: 10px;
+    height: 10px;
+    content: '';
+    border-radius: 5px;
+    display: inline-block;
+    background-color: #bbb;
+  }
+  input[type="radio"]:checked:before{
+    width: 10px;
+    height: 10px;
+    content: '';
+    border-radius: 5px;
+    display: inline-block;
+    background-color: #eee;
   }
 }

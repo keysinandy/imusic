@@ -12,9 +12,9 @@ const Carousel = (props) => {
     const imgBodyRef = useRef();
     const btnBodyRef = useRef();
     //是否正在进行动画
-    let isInAnimation = false;
+    const [isInAnimation, setIsInAnimation] = useState(false);
     //动画ID
-    let reqId = 0;
+    const [reqId, setReqId] = useState(0);
     const [list, setList] = useState(dataList);
     //初始化
     useEffect(()=>{
@@ -33,8 +33,8 @@ const Carousel = (props) => {
     /**
      * @description 使用requestAnimationFrame播放动画
      * @param {number} times
-     * @param {number} length
-     * @param {boolean} [toRight=true]
+     * @param {number} start
+     * @param {number} end
      * @returns Promise
      */
     const playAnim = (times, start, end) => {
@@ -49,19 +49,20 @@ const Carousel = (props) => {
         //向左移则left减小
         end - start < 0 && (moveLen = -moveLen);
         //标志动画的开始
-        isInAnimation = true;
+        setIsInAnimation(true);
         let anim = new Promise(resolve=>{
             const moveTo = () => {
                 if (finishTime < times) {
-                    reqId = requestAnimationFrame(()=>{
+                    let reqId = requestAnimationFrame(()=>{
                         leftNum += moveLen;
                         imgBodyRef.current && (imgBodyRef.current.style.left = leftNum + 'px');
                         finishTime++;
                         moveTo();
                     })
+                    setReqId(reqId)
                 } else {
                     //标志动画的结束
-                    isInAnimation = false;
+                    setIsInAnimation(false);
                     resolve(cancelAnimationFrame(reqId));
                 }
             }
@@ -72,6 +73,9 @@ const Carousel = (props) => {
     
     const handleToPrevPic = () => {
         //最左边向左划
+        if (isInAnimation) {
+            return;
+        }
         if (picViewIndex === 0) {
             //将尾部的图放到最前面
             setList(list.slice(-1).concat(list.slice(0,-1)));
@@ -99,6 +103,9 @@ const Carousel = (props) => {
     },[clickHandler,picViewIndex]);
 
     const handleToNextPic = () => {
+        if (isInAnimation) {
+            return;
+        }
         //最右边向右边划
         if (picViewIndex === imgLength - 1) {
             //将头部的图放到最后面
@@ -149,7 +156,7 @@ const Carousel = (props) => {
             </button>
             <ul className={style.bottomBtns}>
                 {imgList.map((v,i)=>{
-                    return <input type="radio" name="selectPic" id={`radio-${i}`} key={`radio-${i}`} checked={i === picViewIndex} onChange={handleRadioChange}/>
+                    return <input type="radio" className="selectRatio" name="selectPic" id={`radio-${i}`} key={`radio-${i}`} checked={i === picViewIndex} onChange={handleRadioChange}/>
                 })}
             </ul>
             <button className={style.rightBtn} onClick = {handleToNextPic}>
