@@ -1,0 +1,25 @@
+.nav {
+  display: inline-block;
+  width: 200vw;
+  .item {
+    width: 20vw;
+    display: inline-block;
+    position: relative;
+    padding: 5px 10px;
+    font-size: 16px;
+  }
+  .active {
+    color:#ffa400;
+    &::after {
+      content: '';
+      display: block;
+      position: relative;
+      top:5px;
+      width: 15vw;
+      height:1.5vw;
+      border-radius: 0.5vw;
+      background-color: #ffa400;
+    }
+  }
+
+}

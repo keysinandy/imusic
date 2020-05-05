@@ -1,43 +1,27 @@
 import { actionType } from './actionType';
 import { produce } from 'immer'
 const defaultState = {
-  songListData : [],
-  firstTitle : '',
-  secondTitle : '',
-  isPlaylist : false,
-  bannerPicUrl : '',
-  playlistId : -1,
-  subscribed : false,
-  isPersonFm : false,
+  tagList : [],
+  playList:[],
+  offset :0
 };
 
 const reducer = (state = defaultState,action) => {
   switch (action.type) {
-    case actionType.SHOW_SONG_LIST:
-      return produce(state,draft=>{
-        draft.songListData = action.data
-      })
-    case actionType.SET_TITLE: 
-      return produce(state,draft => {
-        draft.firstTitle = action.data.firstTitle;
-        draft.secondTitle = action.data.secondTitle;
-      })
-    case actionType.CHANGE_IS_PLAYLIST:
-      return produce(state,draft => {
-        draft.isPlaylist = action.data;
-      })
-    case actionType.CHANGE_PLAYLIST_ID:
-      return produce(state,draft => {
-        draft.playlistId = action.data;
-      })
-    case actionType.CHANGE_BANNER:
-      return produce(state,draft => {
-        draft.bannerPicUrl = action.data;
-      })
-    case actionType.CHANGE_SUBSCRIBED:
-      return produce(state,draft => {
-        draft.subscribed = action.data;
-      })
+    case actionType.SET_HOT_TAG_LIST:
+      return produce(state,draft=>{  
+        draft.tagList = action.data;
+      });
+    case actionType.REPLACE_LIST:
+      return produce(state,draft=>{  
+        draft.playList = action.data;
+        draft.offset = 1;
+      });
+    case actionType.APPEND_LIST:
+      return produce(state,draft=>{  
+        draft.playList = state.playList.concat(action.data);
+        draft.offset += 1;
+      });
     default:
       return state;
   }

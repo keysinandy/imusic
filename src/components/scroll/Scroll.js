@@ -1,7 +1,8 @@
 import React, { forwardRef, useState, useRef, useEffect, useImperativeHandle } from 'react';
 import BScroll from 'better-scroll';
 import PropTypes from 'prop-types';
-
+import icon from '../../icon';
+import './scroll.scss';
 const Scroll = forwardRef((props,ref) =>{
   //better-scroll 实例对象
   const [bScroll, setBScroll] = useState ();
@@ -94,8 +95,11 @@ const Scroll = forwardRef((props,ref) =>{
 
   return (
     <div ref={scrollRef} style={outerStyle}>
-      <div>
+      <div style={direction === "horizontal" ? {display:'inline-block'}:{}}>
         {props.children}
+        <div className="spin"  hidden={!pullUpLoading}>
+          <i className="iconfont">{icon.loading}</i>
+        </div>
       </div>
     </div>
   );

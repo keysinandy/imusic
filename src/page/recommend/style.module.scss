@@ -39,9 +39,8 @@
     margin-top: 10px;
     display: grid;
     grid-template-columns: repeat(3,30vw);
-    grid-template-rows: repeat(3,35vw);
     grid-column-gap: 3vw;
-    grid-row-gap: 40px;
+    grid-row-gap: 8vh;
     .songListItem {
       width: 30vw;
       height: 30vw;

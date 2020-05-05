@@ -268,6 +268,7 @@ const MusicPlayer = () => {
     filter:'blur(20px)',
   }
   return (<div hidden={isHidden} >
+    <div className={style.imgBg}></div>
     <img src={currentSong ? currentSong.album.picUrl + `?param=${width}y${height}` : playerBg} alt=""  style={imgStyle}/>
     <div className={style.player}>
       <header className={style.header}>

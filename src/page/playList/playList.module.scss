@@ -1,0 +1,17 @@
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.listBg {
+  overflow-y: hidden;
+  margin-top: 2vh;
+  .list {
+    display: grid;
+    grid-template-columns: repeat(3,30vw);
+    // grid-template-rows: repeat(3,35vw);
+    grid-column-gap: 2.5vw;
+    grid-row-gap: 8vh;
+    justify-content: center;
+  }
+}

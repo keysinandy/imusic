@@ -129,15 +129,16 @@ export const fmTrash = (id) => {
   });
 }
 //获取热门歌单tag
-export const getHotPlaylist = (id) => {
+export const getHotPlaylist = () => {
   return axiosInstance.get ('/playlist/hot');
 }
 //根据tag获取歌单
-export const getPlaylistByTag = (limit=9,tag) => {
+export const getPlaylistByTag = (limit=18,tag,offset) => {
   return axiosInstance.get ('/top/playlist',{
     params:{
       limit : limit,
-      order : tag
+      cat : tag,
+      offset : offset
     }
   });
 }

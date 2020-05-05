@@ -1,90 +1,52 @@
 import { actionType } from './actionType';
-import { getDailyRecommend, getSongListDetail, subscribeSongList } from '../../../api/request';
+import { getHotPlaylist, getPlaylistByTag } from '../../../api/request';
 
-export const showSongList = (data) => ({
-  type : actionType.SHOW_SONG_LIST,
-  data : data
-})
-export const setTitle = (data) => ({
-  type : actionType.SET_TITLE,
-  data : data
-})
-export const setIsPlaylist = (data) => ({
-  type : actionType.CHANGE_IS_PLAYLIST,
-  data : data
-})
-export const setBanner = (data) => ({
-  type : actionType.CHANGE_BANNER,
-  data : data
-})
-export const setPlaylistId = (data) => ({
-  type : actionType.CHANGE_PLAYLIST_ID,
-  data : data
-})
-export const showSongListById = (data) => ({
-  type : actionType.SHOW_SONG_LIST_BY_ID,
-  data :data
-})
-export const setSubscribed = (data) => ({
-  type : actionType.CHANGE_SUBSCRIBED,
-  data : data
-})
-export const setIsPersonalFm = (data) => ({
-  type : actionType.CHANGE_PERSONAL_FM,
+const LIMIT_NUM = 18;
+
+const setTagList = (data) => ({
+  type : actionType.SET_HOT_TAG_LIST,
   data : data
 })
 
-export const getDailySongList = () => {
+const setPlayList = (data) => ({
+  type : actionType.REPLACE_LIST,
+  data : data
+})
+
+const appendPlayList = (data) => ({
+  type : actionType.APPEND_LIST,
+  data : data
+})
+
+export const showTagList = () => {
   return (dispatch) =>{
-    getDailyRecommend().then(data => {
-      dispatch (showSongList(data.recommend));
-      dispatch(setBanner(data.recommend[0].album.picUrl));
-      dispatch(setIsPlaylist(false));
-      dispatch(setPlaylistId(-1));
-      dispatch(setSubscribed(false));
-      dispatch(setTitle({
-        firstTitle : '每日推荐',
-        secondTitle : `${new Date().getMonth()+1}/${new Date().getDate()}`
-      }));
-    }).catch ((err) => {
-      console.error (err,'getDailySongList error');
-    }) 
+    getHotPlaylist().then(data=>{
+      dispatch(setTagList(data.tags))
+    }).catch(e=>{
+      console.error(e,'showTagList error')
+    })
   }
 }
-export const ShowSongListDetailById = (id) => {
+
+export const showPlayList = (tagName) => {
   return (dispatch) =>{
-    getSongListDetail(id).then(data => {
-      const res = data.playlist.tracks.map(v=>{
-        v.artists = v.ar;
-        v.album = v.al;
-        v.duration = v.dt;
-        return v;
-      })
-      dispatch(showSongList(res));
-      dispatch(setBanner(data.playlist.coverImgUrl));
-      dispatch(setIsPlaylist(true));
-      dispatch(setSubscribed(data.playlist.subscribed));
-      dispatch(setPlaylistId(data.playlist.id));
-      dispatch(setTitle({
-        firstTitle : data.playlist.name,
-        secondTitle : data.playlist.creator.nickname
-      }))
-    }).catch ((err) => {
-      console.error (err,'ShowSongListDetailById error');
-    }) 
+    getPlaylistByTag(LIMIT_NUM,tagName).then(data=>{
+      dispatch(setPlayList(data.playlists))
+    }).catch(e=>{
+      console.error(e,'showPlayList error')
+    })
   }
 }
-export const setSongListSubscribe = (type,id) => {
+
+export const addPlayList = (tagName,offset,loadCb) => {
   return (dispatch) =>{
-    subscribeSongList(type,id).then(data => {
-      if (type === 1) {
-        dispatch(setSubscribed(true));
-      } else if (type === 2) {
-        dispatch(setSubscribed(false));
+    getPlaylistByTag(LIMIT_NUM,tagName,offset * LIMIT_NUM).then(data=>{
+      if (typeof loadCb === 'function') {
+        loadCb();
       }
-    }).catch ((err) => {
-      console.error (err,'setSongListSubscribe error');
-    }) 
+      dispatch(appendPlayList(data.playlists))
+    }).catch(e=>{
+      console.error(e,'addPlayList error')
+    })
   }
 }
- 

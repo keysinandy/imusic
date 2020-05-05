@@ -1,0 +1,14 @@
+@keyframes spin {
+  100% {
+    transform: rotate(360deg)
+  }
+}
+.spin {
+  width: 8vw;
+  height: 8vw;
+  animation: spin 1s linear;
+  animation-iteration-count: infinite;
+  // position: relative;
+  margin-top: 10vh;
+  margin-left: 46vw;
+}

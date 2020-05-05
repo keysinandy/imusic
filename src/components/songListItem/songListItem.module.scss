@@ -1,0 +1,24 @@
+.songListItem {
+  width: 30vw;
+  height: 30vw;
+  position: relative;
+  .songListItemCover {
+    width: 30vw;
+    height: 30vw;
+    border-radius: 6px;
+  }
+  .songListPlayCount {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    color: #fff;
+  }
+  .songListName {
+    margin-top: 5px;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+    overflow: hidden;
+  }
+}
+

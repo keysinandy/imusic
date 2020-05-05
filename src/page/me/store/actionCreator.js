@@ -38,7 +38,6 @@ export const like = (id) => {
 export const unLike = (id) => {
   return (dispatch) =>{
     likeSong(id,false).then(data => {
-      console.log('unlikel')
       dispatch(minusLikeSong(id));
     }).catch ((err) => {
       console.error (err,'unLike error');
