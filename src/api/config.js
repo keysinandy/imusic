@@ -1,10 +1,10 @@
 import axios from 'axios';
 import { createHashHistory } from 'history'
-// const baseUrl = 'http://47.103.22.99:3000';
+const baseUrl = 'http://47.103.22.99:3000';
 const history = createHashHistory()
 //axios 的实例及拦截器配置
 const axiosInstance = axios.create ({
-  // baseURL: baseUrl,
+  baseURL: baseUrl,
   timeout : 5000,
   withCredentials :true,
   
