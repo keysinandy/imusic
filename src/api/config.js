@@ -1,5 +1,6 @@
 import axios from 'axios';
 import { createHashHistory } from 'history'
+// fix this if release 
 // const baseUrl = 'http://47.103.22.99:3000';
 const history = createHashHistory()
 //axios 的实例及拦截器配置

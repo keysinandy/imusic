@@ -8,6 +8,7 @@ import ChooseLogin from '../page/login/ChooseLogin';
 import SongList from '../page/songList/SongList';
 import RecommendIndex from '../page/recommend/RecommendIndex';
 import PlayList from '../page/playList/PlayList';
+import Rank from '../page/Rank/Rank';
 import { Redirect } from 'react-router-dom';
 
 export default [
@@ -33,6 +34,10 @@ export default [
       {
         path : '/recommend/playList',
         component : PlayList
+      },
+      {
+        path : '/recommend/rank',
+        component : Rank
       }
     ]
   },

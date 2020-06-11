@@ -17,6 +17,11 @@ const BannerIcon = (props) => {
     dispatch(playerAction.changePersonalSongList());
     dispatch(playerAction.showPersonalFmPlayer());
   }
+
+  const handleEnterRank = () => {
+    history.push('/recommend/rank');
+  }
+
   const handleEnterPlayList = () => {
     history.push('/recommend/playList');
   }
@@ -34,7 +39,7 @@ const BannerIcon = (props) => {
       <i>歌单</i>
     </li>
     <li className={style.bannerItem}>
-      <button className={style.bannerBtn}>
+      <button className={style.bannerBtn} onClick={handleEnterRank}>
         <i className="iconfont">{icon.rank}</i> 
       </button>
       <i>排行榜</i>
